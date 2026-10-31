@@ -91,6 +91,19 @@ def create_app() -> FastAPI:
         def legacy_staging_page():
             return FileResponse(str(web / "legacy.html"), headers={"Cache-Control": "no-store"})
 
+        @app.get("/legacy-react", include_in_schema=False)
+        def original_cloudlink_react():
+            # Explicit opt-in: serve only a separately cloned, modified legacy HTML.
+            if os.getenv("XY_ALLOW_LEGACY_REACT") != "1":
+                raise HTTPException(status_code=404, detail="Original React staging disabled")
+            raw_path = os.getenv("XY_CLOUDLINK_LEGACY_HTML_PATH", "")
+            if not raw_path or not Path(raw_path).is_absolute():
+                raise HTTPException(status_code=404, detail="Local React HTML not configured")
+            legacy_html = Path(raw_path)
+            if legacy_html.name != "index.html" or not legacy_html.is_file():
+                raise HTTPException(status_code=404, detail="Original React index unavailable")
+            return FileResponse(str(legacy_html), headers={"Cache-Control": "no-store"})
+
         @app.get("/demo", include_in_schema=False)
         def demo_page():
             return FileResponse(str(web / "index.html"), headers={"Cache-Control": "no-store"})
