@@ -43,3 +43,16 @@ uvicorn app:create_app --factory --host 127.0.0.1 --port 8765
 ## 版本
 - v0.1：FastAPI / SQLite 純 API 示範。
 - v0.2 2026-10-31：同源可操作前端、角色清單查詢、五項測試與三角色 Chromium 隔離實驗；所有正式 Gate 仍關閉。
+
+## M1b-B：真正原版 React 發案處理器整合（2026-10-31）
+- **原版來源**：`punk8895022-byte/yuntech-prototype` 的 [Draft PR #1](https://github.com/punk8895022-byte/yuntech-prototype/pull/1)，在獨立分支修改實際執行的 `index.html` 及對照 `app.jsx` 內 `ClientCreateJob.handleSubmit`，取消該路徑瀏覽器錢包扣款與假付款提示，改送 `POST /legacy/requests`。
+- **安全**：原本 `master` 完全不變；新發案路徑只有本機 `/legacy-react` 且 `XY_ALLOW_LEGACY_REACT=1`、`XY_CLOUDLINK_LEGACY_HTML_PATH` 指向**下載自上述 feature 分支的 index.html 絕對路徑**才會開啟。需手動在表單輸入臨時 customer 測試 token；不儲存權杖。原始舊登入/其他假錢包仍存在，整頁不得對外公開。
+- **運作**：在執行本文前面的必要環境變數後加上兩項（請勿放真實客戶資料）：
+```bash
+export XY_ALLOW_LEGACY_REACT=1
+export XY_CLOUDLINK_LEGACY_HTML_PATH=/absolute/path/to/modified-yuntech-prototype/index.html
+# 限定 loopback：uvicorn app:create_app --factory --host 127.0.0.1 --port 8765
+# /legacy-react 原始 React UI（需可載入 React/CDN，僅供隔離驗證）
+```
+- **驗收**：`python -m pytest -q` 本機 **18/18 PASS**；`python scripts_realtime_loopback_smoke.py` 實際 localhost TCP/HTTP 連線跨角色全流程 PASS；原 M1b Chromium 390px 相容表單 DOM/API/SQLite PASS（瀏覽器 fetch bridge）。**注意：原始 React 完整頁面 Chromium E2E NOT_RUN，因外部 CDN/localhost 的隔離限制。**
+- **剩餘風險**：真實 IAM/多租戶、工程商資格、現場履約、法律金流、用戶資安、原始整頁其他示範付款尚未修正；本地測試不能作 Production 依據。
