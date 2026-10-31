@@ -11,7 +11,8 @@ from pathlib import Path
 from typing import Literal
 from uuid import uuid4
 
-from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi import Depends, FastAPI, Header, HTTPException, Request
+from fastapi.responses import JSONResponse
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -73,11 +74,22 @@ def create_app() -> FastAPI:
           price_ntd INTEGER NOT NULL, scope TEXT NOT NULL,
           FOREIGN KEY(request_id) REFERENCES requests(id));
         """)
-    app = FastAPI(title="CloudLink controlled staging POC", version="0.2.0")
+    app = FastAPI(title="CloudLink controlled staging POC", version="0.3.0")
+    @app.middleware("http")
+    async def loopback_only(request: Request, call_next):
+        source = request.client.host if request.client else ""
+        if source not in {"127.0.0.1", "::1", "testclient"}:
+            return JSONResponse(status_code=403, content={"detail": "loopback only"})
+        return await call_next(request)
+
     # Same-origin demo UI: NO public hosting, NO persisted tokens, NO real customer data.
     web = Path(__file__).resolve().parent / "web"
     if web.is_dir():
         app.mount("/ui", StaticFiles(directory=str(web)), name="demo-static")
+
+        @app.get("/legacy-staging", include_in_schema=False)
+        def legacy_staging_page():
+            return FileResponse(str(web / "legacy.html"), headers={"Cache-Control": "no-store"})
 
         @app.get("/demo", include_in_schema=False)
         def demo_page():
@@ -100,6 +112,11 @@ def create_app() -> FastAPI:
     @app.get("/health")
     def health():
         return {"ok": True, "environment": "STAGING_DEMO_ONLY", "payments_enabled": False}
+
+    from legacy_schema import LegacyRequest, normalize_legacy_request
+    @app.post("/legacy/requests", status_code=201)
+    def create_legacy_request(body: LegacyRequest, actor: str = Depends(role)):
+        return create_request(NewRequest(**normalize_legacy_request(body)), actor=actor)
 
     @app.post("/requests", status_code=201)
     def create_request(body: NewRequest, actor: str = Depends(role)):
