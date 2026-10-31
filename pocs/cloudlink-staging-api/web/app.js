@@ -1,4 +1,4 @@
-// Controlled local-only UI; no localStorage, no external APIs, no payment.
+// Controlled local-only UI; tokens are ephemeral, no external APIs, no payment.
 (() => {
   "use strict";
   const el = id => document.getElementById(id);
