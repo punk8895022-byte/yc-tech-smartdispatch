@@ -48,3 +48,8 @@
 - **本機完整原型（ChatGPT 附件）**：FastAPI + SQLite + legacy category bridge，pytest 15/15，Chromium 390px 擷取（API bridge，非正式網路 E2E）。
 - **GitHub 目前只同步部分原始碼**：[`legacy_schema.py`](pocs/cloudlink-staging-api/legacy_schema.py)、[`test_legacy_schema.py`](pocs/cloudlink-staging-api/tests/test_legacy_schema.py)、[`legacy.html`](pocs/cloudlink-staging-api/web/legacy.html)；`legacy.html` 尚未正式接上 GitHub 目前的 `app.py` / `legacy.js`，不能只從 Repo 啟動 M1b，源碼完整同步待辦。
 - **M1b-A LOCAL_PASS / GITHUB_SOURCE_PARITY BLOCKED / M1b-B NOT_RUN / PRODUCTION OWNER_GATE_CLOSED**。不得把舊 React 39 萬字元介面視為已完成連線，亦沒有真實收入。
+
+## M1b-B｜原版 CloudLink React 真實發案表單 API 接線（DRAFT）
+- [舊專案原始 React feature 分支 Draft PR](https://github.com/punk8895022-byte/yuntech-prototype/pull/1)：`index.html` 與 `app.jsx` 都改為 `ClientCreateJob` 送出 `POST /legacy/requests`；保留 master 不變，取消該流程「假訂金已付款」與錢包扣款。
+- [本專案 staging-only 後端](pocs/cloudlink-staging-api/README.md)：`/legacy-react` 必須本機 loopback、明確設定功能旗標及獨立原版 index 路徑。測試資料只允許虛構資料、類別 `net/cctv/access`、縣市級地區。
+- **Gate**：FastAPI/SQLite 本機 18/18 PASS，另有 Python 127.0.0.1 實際 socket/HTTP 跨角色測試 PASS；舊版原始 React 的完整瀏覽器操作未通過驗收（CDN/React runtime 不可在本環境完整重現）；不代表 IAM/多租戶/金流或 Production 可用。
