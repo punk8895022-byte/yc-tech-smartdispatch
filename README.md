@@ -35,3 +35,10 @@
 - [三項企業解決方案與提案草稿](business/10m/SOW_OFFER_SALES_PLAYBOOK_2026-10-31_v0.1_DRAFT.md)：假設定價、驗收、排除、SOW 和外聯 Gate；尚未對外發送。
 - [CloudLink staging-only 後端 POC](pocs/cloudlink-staging-api/README.md)：FastAPI、SQLite、客戶發案→Reviewer 審核→工程師報價→客戶選擇，測試 `python -m pytest -q` 3/3 PASS（**僅本機隔離，未跑 GitHub Actions**）。關閉付款；未用正式 IAM、多租戶或私人客戶資料。
 - **Next Gate**：前後端 staging 合成 E2E、真實業務需求與成本來源核驗、Owner 核准對外商務聯絡；不得合併 main 或部署 Production。
+
+## M1a｜工程媒合三角色互動關卡（2026-10-31｜LOCAL PASS）
+- 程式：[CloudLink staging-only API + 三角色前端](pocs/cloudlink-staging-api/README.md)，原本的 v0.1 後端已增加 `/demo`、`/my/requests`、`/review/requests`；使用 FastAPI + SQLite，沒有正式登入與金流。
+- 隔離測試：`python -m pytest -q` **5/5 PASS**；Chromium 390px 介面以 in-process ASGI 橋接完成測試發案、審核、報價、選擇、資料讀回。環境封鎖真實 localhost browser navigation，**不能當作完整 HTTP E2E 或正式 CloudLink React 對接通過**。
+- Google Drive [執行報告 V3.2 增量](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[M1 媒合 Issue #3](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/3)；[Product/CTO Issue #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)。
+- **下一關 M1b**：舊版 `yuntech-prototype` 真正 React 前端與新 API 的安全整合；正式 OAuth/IAM、多租戶、工程師審核、報價明細、驗收和實際 staging UAT 全部仍 BLOCKED。
+- PR 仍 Draft；Production／真實客戶／金流／新增付費 API：未執行、未授權。
