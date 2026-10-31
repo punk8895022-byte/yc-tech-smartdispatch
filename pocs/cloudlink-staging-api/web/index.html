@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>YC Tech Match｜本機媒合驗收</title>
+  <link rel="stylesheet" href="/ui/styles.css" />
+  <script defer src="/ui/app.js"></script>
+</head>
+<body>
+  <header><div class="shell head"><div class="logo"><span>YC</span> Tech Match</div><div class="pill">STAGING DEMO • 不可公開接案／不含付款</div></div></header>
+  <main class="shell">
+    <section class="hero"><div class="eyebrow">TECH MARKETPLACE / CONTROLLED TEST</div><h1>從客戶發案到師傅報價<br>已經能跨角色操作。</h1><p>這是完全使用測試資料的工程媒合驗收頁。三種角色必須用本機啟動時的測試權杖登入；權杖只保留在當前瀏覽器頁面記憶體，不儲存或傳給其他網站。</p></section>
+    <div class="warning"><strong>限制：</strong>系統沒有正式會員登入、工程師資格驗證、合約、金流、真實通知、營運保固。請勿輸入真實客戶個資、地址或銀行資料。只允許在 127.0.0.1 本機啟動。</div>
+    <div class="row controls">
+      <label>測試身分 <select id="role"><option value="customer">客戶</option><option value="reviewer">審核員</option><option value="contractor">工程師</option></select></label>
+      <label class="grow">本機測試權杖 <input id="token" type="password" autocomplete="off" placeholder="輸入啟動 API 時設定的對應測試權杖" /></label>
+      <button id="load" class="btn primary">讀取案件</button>
+    </div>
+    <div id="notice" role="status" aria-live="polite" class="notice">尚未連接測試帳號。</div>
+    <section class="card" id="customer-panel">
+      <div class="section-title"><h2>01 客戶發案</h2><span>需求待審核，不能直接公開</span></div>
+      <form id="request-form">
+        <div class="cols"><label>工程類別 <select name="category"><option value="network">商用網路／Wi-Fi</option><option value="cctv">CCTV／NVR</option><option value="access">門禁／弱電</option></select></label><label>地區（測試） <input name="region" value="台南市" required minlength="2" maxlength="60" /></label></div>
+        <label>需求說明（請僅填虛構資料）<textarea name="description" required minlength="12" maxlength="1000">三家虛構門市需要 Wi-Fi AP 配置及網路佈線規劃。</textarea></label>
+        <button class="btn primary" type="submit">新增測試案件</button>
+      </form>
+      <div id="customer-list" class="list"></div>
+    </section>
+    <section class="card" id="reviewer-panel" hidden>
+      <div class="section-title"><h2>02 審核員</h2><span>人工核准，核准才開放報價</span></div>
+      <div id="review-list" class="list"></div>
+    </section>
+    <section class="card" id="contractor-panel" hidden>
+      <div class="section-title"><h2>03 工程師報價</h2><span>只有核准案件才會出現</span></div>
+      <div id="contractor-list" class="list"></div>
+    </section>
+    <footer>CloudLink × YC Tech Match｜隔離驗收 POC v0.2｜無儲值、無平台抽成、無實收。</footer>
+  </main>
+</body></html>
