@@ -28,3 +28,10 @@
 - [Google Drive 證據與戰略決策文件](https://docs.google.com/document/d/1kt7J5Kbl8K16PPuLv10FxzjzBKB6Tnar-I88GrI81eM/edit?usp=drivesdk)
 - [董事會主工作任務 #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)；分工 [CFO #6](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/6)、[Sales #7](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/7)、[COO #8](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/8)、[Growth #9](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/9)、[Product #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)、[Risk #11](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/11)。
 - **注意**：AI「十席」是可重複使用的模擬決策角色，未聘真人、未啟動 Agent、不代表已有訂單或千萬營收。
+
+## V3.1｜執行成果（2026-10-31｜隔離／未部署）
+- [10M 戰情工作簿](https://docs.google.com/spreadsheets/d/1xvE5zR1FEmiFgYcloNrPVJmF7ulDPaX84EOQ1x_5zZE/edit)：新增 `10M戰情總覽`、`10M商機與實收`；未建帳時不把未知報成 0，舊六頁保留。
+- [第一輪實際執行 Drive 報告](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)。
+- [三項企業解決方案與提案草稿](business/10m/SOW_OFFER_SALES_PLAYBOOK_2026-10-31_v0.1_DRAFT.md)：假設定價、驗收、排除、SOW 和外聯 Gate；尚未對外發送。
+- [CloudLink staging-only 後端 POC](pocs/cloudlink-staging-api/README.md)：FastAPI、SQLite、客戶發案→Reviewer 審核→工程師報價→客戶選擇，測試 `python -m pytest -q` 3/3 PASS（**僅本機隔離，未跑 GitHub Actions**）。關閉付款；未用正式 IAM、多租戶或私人客戶資料。
+- **Next Gate**：前後端 staging 合成 E2E、真實業務需求與成本來源核驗、Owner 核准對外商務聯絡；不得合併 main 或部署 Production。
