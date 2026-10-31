@@ -22,3 +22,9 @@
 - **V0.1 範圍：** 保留原雙平台 PRD，V2.0 為新商業研究與 Gate 增量，不取代已存在的功能規格。
 - **商業結論：** 高品質地方弱電/資訊 B2B 需求入口 → 工程商工具訂閱/合法聯盟導流 → 條件成熟後才啟用明示費率的收費模式；不託管工程款、不預設「指數成長必達」。
 - **證據等級：** 市場來源已核對；尚無真實平台合格需求、報價、付費、收入、部署驗收，維持 `RESEARCH_ONLY / OWNER_GATE_CLOSED`。
+
+## V3.0｜年營收 NT$10,000,000 董事會作戰室（DRAFT）
+- [十席 AI 經營團隊與 12 個月三情境收入模型](https://github.com/punk8895022-byte/yc-tech-smartdispatch/blob/feature/asset-os-dual-platforms-20261031/docs/ASSET_OS_10M_REVENUE_WAR_ROOM_20261031_V3_DRAFT.md)
+- [Google Drive 證據與戰略決策文件](https://docs.google.com/document/d/1kt7J5Kbl8K16PPuLv10FxzjzBKB6Tnar-I88GrI81eM/edit?usp=drivesdk)
+- [董事會主工作任務 #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)；分工 [CFO #6](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/6)、[Sales #7](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/7)、[COO #8](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/8)、[Growth #9](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/9)、[Product #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)、[Risk #11](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/11)。
+- **注意**：AI「十席」是可重複使用的模擬決策角色，未聘真人、未啟動 Agent、不代表已有訂單或千萬營收。
