@@ -12,6 +12,8 @@ from typing import Literal
 from uuid import uuid4
 
 from fastapi import Depends, FastAPI, Header, HTTPException
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 Category = Literal["network", "cctv", "access"]
@@ -71,7 +73,16 @@ def create_app() -> FastAPI:
           price_ntd INTEGER NOT NULL, scope TEXT NOT NULL,
           FOREIGN KEY(request_id) REFERENCES requests(id));
         """)
-    app = FastAPI(title="CloudLink controlled staging POC", version="0.1.0")
+    app = FastAPI(title="CloudLink controlled staging POC", version="0.2.0")
+    # Same-origin demo UI: NO public hosting, NO persisted tokens, NO real customer data.
+    web = Path(__file__).resolve().parent / "web"
+    if web.is_dir():
+        app.mount("/ui", StaticFiles(directory=str(web)), name="demo-static")
+
+        @app.get("/demo", include_in_schema=False)
+        def demo_page():
+            return FileResponse(str(web / "index.html"), headers={"Cache-Control": "no-store"})
+
 
     def role(authorization: str | None = Header(default=None)) -> str:
         if not authorization or not authorization.startswith("Bearer "):
@@ -108,6 +119,22 @@ def create_app() -> FastAPI:
             if cur.rowcount != 1:
                 raise HTTPException(status_code=409, detail="Not pending or not found")
         return {"id": request_id, "state": body.decision}
+
+    @app.get("/my/requests")
+    def my_requests(actor: str = Depends(role)):
+        authorize(actor, "customer")
+        with connection(path) as db:
+            rows = db.execute("""SELECT id,category,region,description,state,selected_quote
+                                 FROM requests WHERE customer=? ORDER BY rowid DESC""", (actor,)).fetchall()
+        return [dict(r) for r in rows]
+
+    @app.get("/review/requests")
+    def review_requests(actor: str = Depends(role)):
+        authorize(actor, "reviewer")
+        with connection(path) as db:
+            rows = db.execute("""SELECT id,category,region,description,state
+                                 FROM requests WHERE state='PENDING' ORDER BY rowid DESC""").fetchall()
+        return [dict(r) for r in rows]
 
     @app.get("/requests")
     def get_requests(actor: str = Depends(role)):
