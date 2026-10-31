@@ -15,3 +15,10 @@
 
 ## 變更
 - 2026-10-31：首次建立雙平台規劃入口，未對 Production 造成異動。
+
+## V2.0 全球平台研究與成長策略（2026-10-31｜DRAFT）
+- **唯一 V2.0 戰略／Benchmark 入口：** [全球平台比較 × 四大飛輪 × 收益模型 × 90 天驗收](docs/ASSET_OS_V2_GLOBAL_PLATFORM_BENCHMARK_AND_GROWTH_20261031_DRAFT.md)
+- **Google Drive 對照版：** https://docs.google.com/document/d/1T-iSjJ-IluVboCRnLVTQ_dfLSi_eHBwEm92V1_0Cq00/edit
+- **V0.1 範圍：** 保留原雙平台 PRD，V2.0 為新商業研究與 Gate 增量，不取代已存在的功能規格。
+- **商業結論：** 高品質地方弱電/資訊 B2B 需求入口 → 工程商工具訂閱/合法聯盟導流 → 條件成熟後才啟用明示費率的收費模式；不託管工程款、不預設「指數成長必達」。
+- **證據等級：** 市場來源已核對；尚無真實平台合格需求、報價、付費、收入、部署驗收，維持 `RESEARCH_ONLY / OWNER_GATE_CLOSED`。
