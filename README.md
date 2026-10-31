@@ -42,3 +42,9 @@
 - Google Drive [執行報告 V3.2 增量](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[M1 媒合 Issue #3](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/3)；[Product/CTO Issue #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)。
 - **下一關 M1b**：舊版 `yuntech-prototype` 真正 React 前端與新 API 的安全整合；正式 OAuth/IAM、多租戶、工程師審核、報價明細、驗收和實際 staging UAT 全部仍 BLOCKED。
 - PR 仍 Draft；Production／真實客戶／金流／新增付費 API：未執行、未授權。
+
+## V3.3｜CloudLink M1b-A 舊分類相容性驗收（2026-10-31）
+- [Drive V3.3 隔離驗收來源](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[Issue #3](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/3) / [Issue #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)。
+- **本機完整原型（ChatGPT 附件）**：FastAPI + SQLite + legacy category bridge，pytest 15/15，Chromium 390px 擷取（API bridge，非正式網路 E2E）。
+- **GitHub 目前只同步部分原始碼**：[`legacy_schema.py`](pocs/cloudlink-staging-api/legacy_schema.py)、[`test_legacy_schema.py`](pocs/cloudlink-staging-api/tests/test_legacy_schema.py)、[`legacy.html`](pocs/cloudlink-staging-api/web/legacy.html)；`legacy.html` 尚未正式接上 GitHub 目前的 `app.py` / `legacy.js`，不能只從 Repo 啟動 M1b，源碼完整同步待辦。
+- **M1b-A LOCAL_PASS / GITHUB_SOURCE_PARITY BLOCKED / M1b-B NOT_RUN / PRODUCTION OWNER_GATE_CLOSED**。不得把舊 React 39 萬字元介面視為已完成連線，亦沒有真實收入。
