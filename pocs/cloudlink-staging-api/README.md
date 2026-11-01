@@ -56,3 +56,15 @@ export XY_CLOUDLINK_LEGACY_HTML_PATH=/absolute/path/to/modified-yuntech-prototyp
 ```
 - **驗收**：`python -m pytest -q` 本機 **18/18 PASS**；`python scripts_realtime_loopback_smoke.py` 實際 localhost TCP/HTTP 連線跨角色全流程 PASS；原 M1b Chromium 390px 相容表單 DOM/API/SQLite PASS（瀏覽器 fetch bridge）。**注意：原始 React 完整頁面 Chromium E2E NOT_RUN，因外部 CDN/localhost 的隔離限制。**
 - **剩餘風險**：真實 IAM/多租戶、工程商資格、現場履約、法律金流、用戶資安、原始整頁其他示範付款尚未修正；本地測試不能作 Production 依據。
+
+## M1c-A｜多客戶／多工程師權限隔離（2026-11-01）
+
+**修復的真實阻塞：** GitHub 的 `tests/test_workflow.py` 曾有一行未閉合 `assert`（語法錯誤）；已在本分支修復。故先前 GitHub HEAD 所聲稱的「18/18」不能當 CI 驗證，修正後本機重建測試結果如下。
+
+- **新增 `XY_DEMO_ACTORS_JSON` 受控測試配置**：最多 12 組環境變數合成客戶／工程師，明確檢查 ID、身分、互異長權杖；配置無效時拒絕啟動。既有 3 組測試權杖保留向下相容。所有身分都只是 **staging-only**。
+- **新增身份歸屬**：客戶案件以 actor ID 儲存；客戶 A 與 B 的 `GET /my/requests` 各自隔離，`GET /requests/{id}/quotes` 與 `POST /quotes/{id}/select` 對他人案回 404。
+- **新增工程師自己的報價**：`GET /my/quotes` 按工程師 actor ID 讀取，工程師 B 無法看到工程師 A 的私有報價清單。審核員可審核待審案件，此為設計的角色授權範圍。
+- **測試來源**：`tests/test_m1c_identity_isolation.py`（2 客戶×2 工程師，含拒絕錯誤身分、跨客戶/報價、重複選擇）；`scripts_m1c_multi_actor_socket_smoke.py`（真正的本機 TCP/HTTP＋SQLite 寫讀）。
+- **實際本機**：在前次已驗證的 M1b 本機包套用與 GitHub 相同的 M1c 變更，`python -m pytest -q` **25/25 PASS**；`python scripts_m1c_multi_actor_socket_smoke.py` **M1C_LOOPBACK_SOCKET_PASS**。
+- **重要區分**：這是 M1c-A **LOCAL PASS**，**不是** GitHub Actions CI；此次 GitHub 完整 checkout CI／原始 React 39 萬字整頁瀏覽器 E2E 仍 **NOT_VERIFIED**。無正式 IAM、註冊/帳號管理、撤銷/密碼安全、多租戶資料庫級政策、客服稽核、真實工程師核驗。舊版其他明文 demo 及假金融入口未清理，不可上線。
+- **Gate**：Owner APPROVAL CLOSED；兩個 Draft PR 不合併、無 Production／LINE／金流變更，所有資料必須是虛構。下一關 M1c-B 為真實 Identity 設計及隔離 Staging 安全審核。
