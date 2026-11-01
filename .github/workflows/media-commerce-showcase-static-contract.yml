@@ -1,0 +1,18 @@
+name: media-commerce-showcase-static-contract
+on:
+  pull_request:
+    branches:
+      - feature/asset-os-dual-platforms-20261031
+    paths:
+      - 'pocs/media-commerce-showcase/**'
+      - '.github/workflows/media-commerce-showcase-static-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run standard-library static checks (no APIs/secrets)
+        run: python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v
