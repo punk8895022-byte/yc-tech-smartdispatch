@@ -103,13 +103,37 @@ def create_app() -> FastAPI:
           price_ntd INTEGER NOT NULL, scope TEXT NOT NULL,
           FOREIGN KEY(request_id) REFERENCES requests(id));
         """)
-    app = FastAPI(title="CloudLink controlled staging POC", version="0.3.0")
+    # Opt-in synthetic sessions. Bootstrap tokens are exchange-only when on.
+    session_mode = os.getenv("XY_STAGING_SESSIONS") == "1"
+    sessions = None
+    if session_mode:
+        from staging_sessions import StagingSessions
+        try:
+            ttl = int(os.getenv("XY_STAGING_SESSION_TTL", "600"))
+            sessions = StagingSessions(path, ttl)
+        except (ValueError, TypeError) as exc:
+            raise RuntimeError("Invalid isolated staging session configuration") from exc
+    app = FastAPI(title="CloudLink controlled staging POC", version="0.4.0")
+
     @app.middleware("http")
     async def loopback_only(request: Request, call_next):
         source = request.client.host if request.client else ""
         if source not in {"127.0.0.1", "::1", "testclient"}:
             return JSONResponse(status_code=403, content={"detail": "loopback only"})
         return await call_next(request)
+
+    if sessions:
+        @app.middleware("http")
+        async def audit_actions(request: Request, call_next):
+            response = await call_next(request)
+            # Only API paths and decisions are logged. Never UUID paths, form
+            # contents, query parameters, or Authorization headers.
+            route = request.scope.get("route")
+            template = getattr(route, "path", None)
+            if request.url.path.startswith(("/requests", "/quotes", "/my/", "/review/", "/legacy/", "/staging/")):
+                sessions.audit(getattr(request.state, "actor", None), request.method,
+                               template or "unmatched", response.status_code)
+            return response
 
     # Same-origin demo UI: NO public hosting, NO persisted tokens, NO real customer data.
     web = Path(__file__).resolve().parent / "web"
@@ -138,14 +162,50 @@ def create_app() -> FastAPI:
             return FileResponse(str(web / "index.html"), headers={"Cache-Control": "no-store"})
 
 
-    def role(authorization: str | None = Header(default=None)) -> str:
+    def role(request: Request, authorization: str | None = Header(default=None)) -> str:
         if not authorization or not authorization.startswith("Bearer "):
-            raise HTTPException(status_code=401, detail="Bearer demo token required")
+            raise HTTPException(status_code=401, detail="Bearer test session required")
         presented = authorization[7:]
+        if sessions:
+            actor = sessions.authenticate(presented)
+            if actor is None or actor not in identities:
+                raise HTTPException(status_code=401, detail="Invalid or expired staging session")
+            request.state.actor = actor
+            return actor
         for identity, token in identities.items():
             if secrets.compare_digest(presented, token):
+                request.state.actor = identity
                 return identity
         raise HTTPException(status_code=401, detail="Invalid demo token")
+
+    @app.post("/staging/session")
+    def exchange_session(request: Request, authorization: str | None = Header(default=None)):
+        if not sessions:
+            raise HTTPException(status_code=404, detail="Staging sessions disabled")
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Bootstrap token required")
+        presented = authorization[7:]
+        for actor, bootstrap in identities.items():
+            if secrets.compare_digest(presented, bootstrap):
+                request.state.actor = actor
+                token, lifetime = sessions.issue(actor)
+                return JSONResponse({"access_token": token, "expires_in": lifetime, "token_type": "Bearer"},
+                                    headers={"Cache-Control": "no-store"})
+        raise HTTPException(status_code=401, detail="Invalid bootstrap token")
+
+    @app.post("/staging/session/revoke")
+    def revoke_session(request: Request, actor: str = Depends(role), authorization: str | None = Header(default=None)):
+        if not sessions or not authorization or not sessions.revoke(authorization[7:], actor):
+            raise HTTPException(status_code=401, detail="Session unavailable")
+        return {"revoked": True}
+
+    @app.get("/staging/audit")
+    def read_audit(actor: str = Depends(role)):
+        if not sessions:
+            raise HTTPException(status_code=404, detail="Audit disabled")
+        authorize(actor, "reviewer")
+        return sessions.recent_events()
+
 
     def authorize(actual: str, allowed: str):
         role_name = actual.split(":", 1)[0]
