@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="description" content="CloudLink 智慧派工合成流程展示：資訊弱電需求、人工審核、工程師報價與客戶選擇，內部測試。">
+<title>CloudLink 智慧派工流程｜小雲作品展示</title><link rel="stylesheet" href="./assets/styles.css"></head><body>
+<a class="skip" href="#main">跳至主要內容</a>
+<div class="notice"><b>INTERNAL REVIEW / PRODUCTION CLOSED</b>　CloudLink 僅供審核・尚無正式登入、媒合或金流</div>
+<header class="header"><div class="wrap"><a class="logo" href="./index.html">小雲<span> /</span> Works</a><nav class="nav" aria-label="主導覽"><a href="./index.html">← 所有作品</a><a href="#workflow">工作流程</a><a href="#evidence">證據與限制</a></nav></div></header>
+<main id="main"><section class="detail-hero"><div class="wrap detail-grid">
+<div><div class="eyebrow">02 / FIELD SERVICE / CLOUDLINK</div><h1>工程案子從發出需求，<br>到報價都能追蹤。</h1>
+<p class="lead">為資訊弱電、網路 AP、CCTV 與門禁等服務建立清楚的需求路徑。以「客戶發案 → 審核 → 工程師報價 → 客戶選擇」減少資訊散落與狀態不明。</p>
+<div class="chips" style="margin-top:22px"><span class="chip">弱電／資訊工程</span><span class="chip">台南與南部服務驗證候選</span><span class="chip warn">尚未正式上線</span></div>
+<div class="actions"><a class="button" href="#workflow">看四階段流程</a><a class="button secondary" href="#evidence">看驗收證據</a></div>
+<div class="band"><strong>服務能力尚未核定。</strong>這不是立即可用的發案平台，也沒有經核驗的公開師傅清單或付款保障。</div>
+</div>
+<div class="preview teal" aria-label="CloudLink 工單合成示意">
+<div class="tag">SYNTHETIC / STAGING WORKFLOW</div>
+<div class="screen">case: EXAMPLE-001<br>category: network / cctv<br>status: <b>PENDING_REVIEW</b><br>review: <b>APPROVED</b><br>quote: <b>SUBMITTED</b><br>selection: <b>SELECTED</b><br>payment: <strong>DISABLED</strong></div>
+<small>所有案件與工程師身份均為合成示意；不是實際投案、工程履約或真實結帳。</small></div>
+</div></section>
+<section class="section" id="workflow"><div class="wrap"><div class="eyebrow">DEMO FLOW</div><h2>從一筆需求，留下完整的四步紀錄</h2>
+<div class="grid2"><ol class="steps">
+<li><strong>01｜客戶描述問題</strong><span>選擇網路、CCTV 或門禁類別，輸入場景與需求。試驗中使用虛構資料。</span></li>
+<li><strong>02｜審核員檢視</strong><span>確認案件類別與基本欄位；目前僅示範流程，不代表正式服務保證。</span></li>
+<li><strong>03｜工程師提出報價</strong><span>記錄報價及方案；真實工程資格、成本估算與服務地區仍需驗證。</span></li>
+<li><strong>04｜客戶選擇與留存</strong><span>保存所選報價及狀態；付款與正式履約驗收功能均未啟用。</span></li>
+</ol><div><div class="fact"><h3>適用對象</h3><p>中小型工程公司、弱電承包商，以及需要留下報修、報價與進度紀錄的客戶。</p></div>
+<div class="fact" style="margin-top:14px"><h3>現有技術範圍</h3><p>已記錄 FastAPI／SQLite 隔離工作流與原版 React 表單接線；正式登入、多租戶、通知、保固與金流仍未通過。</p></div>
+<div class="fact" style="margin-top:14px"><h3>後續必要條件</h3><p>實際工程商資格、合約和客服責任，以及真實 Staging 瀏覽器 E2E、權限隔離、安全審查和 Owner Gate。</p></div></div>
+</div></div></section>
+<section class="section alt" id="evidence"><div class="wrap"><div class="eyebrow">PROOF / STATUS</div><h2>目前已測的是流程，不是正式媒合服務</h2>
+<div class="grid2"><div class="evidence"><h3>有來源支持的成果</h3><ul>
+<li>既有隔離 POC 的 FastAPI／SQLite 測試記錄：18/18 本機 pytest PASS。</li>
+<li>測試環境 127.0.0.1 的 socket/HTTP 合成發案→報價→選擇流程有通過紀錄。</li>
+<li>原版 React 發案處理器與隔離 API 的程式接線已在 Draft PR 提交。</li>
+</ul><p class="fine">本展示是靜態導覽，不直接呼叫該 API。上述是既有分支/Drive 紀錄，不是此展示分支重新做的網路 E2E。</p></div>
+<div class="evidence"><h3>阻塞與未完成項目</h3><ul>
+<li>原版 React 完整瀏覽器 E2E：BLOCKED_NOT_RUN。</li>
+<li>正式 Identity、RBAC、多租戶資料隔離、師傅資格：NOT_VERIFIED。</li>
+<li>Production、正式案源、付款與金流：OWNER_GATE_CLOSED。</li>
+</ul><p class="fine">舊版存在示範錢包／帳密相關風險，不能直接作為公開 SaaS。</p></div>
+</div>
+<div class="actions"><a class="button secondary" href="./index.html">返回作品列表</a><a class="button secondary" href="./xy-hd-001.html">看上一個作品 →</a></div>
+</div></section></main><footer class="footer"><div class="wrap"><span>CloudLink · 小雲 Media Commerce 作品展示 v0.1</span><span>合成示範 / 無付款 / 2026-11-01</span></div></footer></body></html>
