@@ -32,3 +32,11 @@
 ## 5. 此 PR 的精確限制
 `STATIC_SHOWCASE_COMPLETE` 僅指兩個 HTML 作品頁與導覽；**不是 `PRODUCT_E2E_PASS`、`COMMERCIAL_READY` 或 `PUBLIC_LIVE`。**
 PR base 為既有 `feature/asset-os-dual-platforms-20261031`，不直接以 main 為 base，避免夾帶未審的原平台改動。測試或契約變更不得自動 merge。
+
+## 6. 本輪實際讀回契約檢核（2026-11-01）
+- GitHub 實際 branch 提交及 fetch_file 讀回：7 個關鍵檔案皆可讀；PR #12 顯示共 10 個變更檔。
+- 同一輪從 GitHub 讀回最新 HTML／CSS／Manifest／測試檔／Evidence 後，執行 18 項 JS 結構與安全邊界核對：**18/18 PASS**，內部相對連結缺失 **0**。
+- 檢核範圍：HTML doctype、viewport、noindex、兩筆 manifest、兩個詳情 route、關閉付款/表單/追蹤、首頁導覽、證據區、合成標示、無 script/form/iframe/input/img、無對外 URL、CSS focus/390px/reduced motion、證據索引、Python 測試案例數、Drive 母文件增量與內部連結完整性。
+- **此 18/18 是 connector 讀回與文字契約核對，不是 Python unittest 的執行結果，也不是 Chromium、iPhone 或 VoiceOver 的視覺測試。**
+- GitHub Actions workflow 已新增，但截至本檢查 commit 尚無 workflow run；**CI_NOT_RUN**。
+- 因此 G2 `STATIC_SOURCE_READBACK_PASS`，G3 `CI_AND_BROWSER_PENDING`，G5 `OWNER_GATE_CLOSED`。未獲 Owner 正式發布核准。
