@@ -1,5 +1,11 @@
 name: media-commerce-showcase-static-contract
 on:
+  push:
+    branches:
+      - feature/media-commerce-showcase-mvp-20261101
+    paths:
+      - 'pocs/media-commerce-showcase/**'
+      - '.github/workflows/media-commerce-showcase-static-contract.yml'
   pull_request:
     branches:
       - feature/asset-os-dual-platforms-20261031
@@ -12,6 +18,7 @@ permissions:
 jobs:
   offline-contract:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
       - name: Run standard-library static checks (no APIs/secrets)
