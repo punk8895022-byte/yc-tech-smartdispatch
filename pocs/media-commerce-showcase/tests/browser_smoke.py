@@ -98,7 +98,7 @@ def main():
         chrome_process = subprocess.Popen(args,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
         try:
             active = Path(user_dir) / "DevToolsActivePort"
-            for _ in range(100):
+            for _ in range(400):
                 if active.exists():
                     break
                 if chrome_process.poll() is not None:
