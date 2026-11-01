@@ -66,3 +66,10 @@
 - **G2_SCOPE_RECONCILED / LOCAL_UNIT_PASS_SCOPED；CANONICAL_BUSINESS_OS_NOT_CONNECTED；G3_RUNTIME_NOT_RUN；Owner Gate CLOSED**。未經核實 Identity/Tenant/RBAC、審核證據與正式後端，不得把 `REVIEW_ONLY` 升級對外操作。
 - 此分支新 code 沒有被接入 `app.py` 正式路由；任何被截圖的通過畫面或合成記錄不代表真實客戶成交／收入。
 
+
+## V3.6｜M1c-B 短效工作階段／撤銷與精簡稽核（2026-11-01）
+- [M1c-B 測試證據](pocs/cloudlink-staging-api/M1CB_EXECUTION_EVIDENCE_2026-11-01.md)：現有 staging-only FastAPI／SQLite 擴充隨機短效 session、撤銷與匿名化路由稽核（非正式 IAM）。
+- [隔離測試 API 說明](pocs/cloudlink-staging-api/README.md)：`XY_STAGING_SESSIONS=1` 才啟用，原 bootstrap token 在此模式不能直接當業務 API 身分，session TTL 5–900 秒。
+- **本機測試**：`pytest` 30/30 PASS；真實 `127.0.0.1` TCP/HTTP `M1CB_REAL_SOCKET_PASS`；GitHub Actions CI / 原始 React 完整 E2E 尚未驗證。
+- [Google Drive 單一執行證據 V3.6](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[主 Issue #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)。
+- **M1c-B LOCAL_PASS / M1c-C NOT_RUN / G6 OWNER_GATE_CLOSED**：真實 IAM/租戶 RLS、React UI 短效 Session、TLS/限流、工程師身份、正式金流/營收均未完成，不合併 PR、不部署 Production。
