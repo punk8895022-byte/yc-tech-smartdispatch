@@ -3,7 +3,9 @@ Run: XY_ALLOW_DEMO_API=1 XY_DEMO_CUSTOMER_TOKEN=... XY_DEMO_CONTRACTOR_TOKEN=...
      XY_DEMO_REVIEWER_TOKEN=... XY_DEMO_DB_PATH=/tmp/xy_cloudlink_demo.db
      uvicorn app:create_app --factory --host 127.0.0.1
 """
+import json
 import os
+import re
 import secrets
 import sqlite3
 from contextlib import contextmanager
@@ -57,6 +59,33 @@ def create_app() -> FastAPI:
     }
     if any(len(v) < 20 for v in tokens.values()) or len(set(tokens.values())) != 3:
         raise RuntimeError("Three distinct 20+ character demo tokens required")
+    # Opt-in, environment-only synthetic identities for cross-account isolation tests.
+    # This is NOT a production authentication provider or persisted user registry.
+    identities = dict(tokens)
+    extra_json = os.getenv("XY_DEMO_ACTORS_JSON")
+    if extra_json:
+        try:
+            extra = json.loads(extra_json)
+            if not isinstance(extra, list) or len(extra) > 12:
+                raise ValueError("Expected a list with 0-12 actors")
+            for item in extra:
+                if not isinstance(item, dict) or set(item) != {"id", "role", "token"}:
+                    raise ValueError("Each actor requires exactly id, role, token")
+                role_name, name, token = item["role"], item["id"], item["token"]
+                if role_name not in ("customer", "contractor"):
+                    raise ValueError("Extra actor role must be customer or contractor")
+                if not isinstance(name, str) or not re.fullmatch(r"[a-z][a-z0-9-]{1,30}", name):
+                    raise ValueError("Invalid synthetic actor identifier")
+                if not isinstance(token, str) or len(token) < 20:
+                    raise ValueError("Synthetic token must contain 20+ characters")
+                actor_id = role_name + ":" + name
+                if actor_id in identities:
+                    raise ValueError("Duplicate synthetic actor identifier")
+                identities[actor_id] = token
+            if len(set(identities.values())) != len(identities):
+                raise ValueError("All synthetic tokens must be distinct")
+        except (ValueError, TypeError, json.JSONDecodeError) as exc:
+            raise RuntimeError("Invalid XY_DEMO_ACTORS_JSON staging configuration") from exc
     path = os.getenv("XY_DEMO_DB_PATH", "")
     if not path or path == ":memory:":
         raise RuntimeError("Explicit isolated SQLite file path required")
@@ -113,13 +142,14 @@ def create_app() -> FastAPI:
         if not authorization or not authorization.startswith("Bearer "):
             raise HTTPException(status_code=401, detail="Bearer demo token required")
         presented = authorization[7:]
-        for identity, token in tokens.items():
+        for identity, token in identities.items():
             if secrets.compare_digest(presented, token):
                 return identity
         raise HTTPException(status_code=401, detail="Invalid demo token")
 
     def authorize(actual: str, allowed: str):
-        if actual != allowed:
+        role_name = actual.split(":", 1)[0]
+        if role_name != allowed:
             raise HTTPException(status_code=403, detail="Role not allowed")
 
     @app.get("/health")
@@ -184,6 +214,15 @@ def create_app() -> FastAPI:
             db.execute("INSERT INTO quotes VALUES (?,?,?,?,?)",
                        (qid, body.request_id, actor, body.price_ntd, body.scope))
         return {"id": qid, "request_id": body.request_id}
+
+    @app.get("/my/quotes")
+    def my_quotes(actor: str = Depends(role)):
+        authorize(actor, "contractor")
+        with connection(path) as db:
+            rows = db.execute("""SELECT id,request_id,price_ntd,scope
+                                 FROM quotes WHERE contractor=? ORDER BY rowid DESC""",
+                              (actor,)).fetchall()
+        return [dict(r) for r in rows]
 
     @app.get("/requests/{request_id}/quotes")
     def get_quotes(request_id: str, actor: str = Depends(role)):
