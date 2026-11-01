@@ -53,3 +53,13 @@
 - [舊專案原始 React feature 分支 Draft PR](https://github.com/punk8895022-byte/yuntech-prototype/pull/1)：`index.html` 與 `app.jsx` 都改為 `ClientCreateJob` 送出 `POST /legacy/requests`；保留 master 不變，取消該流程「假訂金已付款」與錢包扣款。
 - [本專案 staging-only 後端](pocs/cloudlink-staging-api/README.md)：`/legacy-react` 必須本機 loopback、明確設定功能旗標及獨立原版 index 路徑。測試資料只允許虛構資料、類別 `net/cctv/access`、縣市級地區。
 - **Gate**：FastAPI/SQLite 本機 18/18 PASS，另有 Python 127.0.0.1 實際 socket/HTTP 跨角色測試 PASS；舊版原始 React 的完整瀏覽器操作未通過驗收（CDN/React runtime 不可在本環境完整重現）；不代表 IAM/多租戶/金流或 Production 可用。
+
+
+## Media Commerce｜作品展示 MVP v0.1（2026-11-01，隔離預覽）
+
+- [一次驗收入口｜純靜態兩件作品展示](pocs/media-commerce-showcase/README.md)：`index.html`、`xy-hd-001.html`、`cloudlink.html`，不需後端、AI API 或資料庫。
+- [作品白名單](pocs/media-commerce-showcase/projects.json)：只含兩個合成展示候選，`public_approved=false`、`payment_enabled=false`。
+- [原專案證據與 Reviewer/Owner Gate](pocs/media-commerce-showcase/evidence/OWNER_REVIEW_2026-11-01_v0.1_DRAFT.md)：分開記錄既有測試證據、未通過 E2E 與正式發布限制。
+- [靜態離線契約測試](pocs/media-commerce-showcase/tests/test_contract.py)：需看實際 CI 結果，不因提交檔案即標示通過。
+- 基礎分支：`feature/asset-os-dual-platforms-20261031`；本成果獨立分支：`feature/media-commerce-showcase-mvp-20261101`。
+- **Gate：DRAFT_ONLY / NOT_DEPLOYED / OWNER_GATE_CLOSED**；不得自動 merge、部署、公開投稿 IdeaX、收款或接正式 LINE / AI OS。已有 Media Commerce PRD 繼續是母規格，不建立第二個主資料域。
