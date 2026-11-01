@@ -40,3 +40,13 @@ PR base 為既有 `feature/asset-os-dual-platforms-20261031`，不直接以 main
 - **此 18/18 是 connector 讀回與文字契約核對，不是 Python unittest 的執行結果，也不是 Chromium、iPhone 或 VoiceOver 的視覺測試。**
 - GitHub Actions workflow 已新增，但截至本檢查 commit 尚無 workflow run；**CI_NOT_RUN**。
 - 因此 G2 `STATIC_SOURCE_READBACK_PASS`，G3 `CI_AND_BROWSER_PENDING`，G5 `OWNER_GATE_CLOSED`。未獲 Owner 正式發布核准。
+
+## 7. 2026-11-01 最新 G3 自動驗收增量（覆蓋第 6 節過往 CI_NOT_RUN 快照）
+- **最終成功 Run**：https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41293584631 。該 run 的 `offline-contract` job COMPLETED/SUCCESS，並非僅檔案讀回。
+- **Python unittest**：`python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v`，14/14 PASS。
+- **Chromium CDP 實際版面檢查**：`index.html`、`xy-hd-001.html`、`cloudlink.html` × 390px（mobile emulation）／1280px（desktop）= **6/6 PASS**；讀取當次 checked-out HTML 與 CSS，測試載入、viewport 寬、主要內容、CSS grid 欄數與無水平溢出；沒有網路端到端導航。為避開檔案/回圈位址環境政策，測試使用 `about:blank` + `document.write` 載入**相同的本機 HTML/CSS bytes**，不是部署網站功能測試。
+- **截圖**：GitHub Actions Artifact `media-commerce-showcase-browser-shots` ID `13078621441`，6 張 PNG，保存 7 日，預計 2026-11-08 到期；入口：https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41293584631/artifacts/13078621441 。
+- **字型修正**：首輪截圖 CJK 缺字方框，已於 GitHub CI Runner 安裝 `fonts-noto-cjk` 並在 CSS 補 `Noto Sans CJK TC` fallback；重新產生最新截圖後，已人工查看首頁、XY-HD-001、CloudLink 的桌面與 390px 截圖，中文字型、首頁 Hero、CTA 及產品狀態可讀，未見首屏裁切／橫向溢位。
+- **CI 失敗歷史**：先前 Run #41293314661 為 Chromium Profile 暫存清理競態；#41293373550 為冷啟動 DevTools 逾時，後續在隔離分支修復並以最終 SUCCESS run 為準，不刪除失敗紀錄。
+- **Gate 精確判定**：G2 `STATIC_SOURCE_READBACK_PASS`；G3 `AUTOMATED_CONTRACT_AND_CHROMIUM_LAYOUT_PASS_SCOPED`；真人 iPhone Safari／VoiceOver、正式服務 E2E／公開 IP 授權／真實商業權限仍 `NOT_VERIFIED`；G5 `OWNER_GATE_CLOSED`。
+- **限制**：6/6 截圖證明示範頁本機渲染/版面，**不代表原 XY-HD-001 真人 Claude/Codex 交接或 CloudLink 原版 React E2E 已通過，更不代表 Production、真人付款或 IdeaX 投稿通過**。
