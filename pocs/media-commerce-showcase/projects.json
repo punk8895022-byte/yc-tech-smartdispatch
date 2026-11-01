@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.1.0",
+  "generated_at": "2026-11-01",
+  "scope": "INTERNAL_PREVIEW_ONLY",
+  "source_domain": "Media Commerce / Asset OS",
+  "publishing": {
+    "owner_gate": "CLOSED",
+    "public_approved": false,
+    "payment_enabled": false,
+    "forms_enabled": false,
+    "tracking_enabled": false
+  },
+  "projects": [
+    {
+      "id": "XY-HD-001",
+      "name": "跨 AI 專案交接工具包",
+      "route": "xy-hd-001.html",
+      "category": "ai-workflow",
+      "demo_kind": "STATIC_SYNTHETIC",
+      "display_status": "INTERNAL_PREVIEW",
+      "public_approved": false,
+      "evidence_status": "EXISTING_SOURCE_CITED_NOT_RETESTED",
+      "evidence_id": "E-XY-001",
+      "limitations": [
+        "REAL_CLAUDE_CODEX_E2E_NOT_RUN",
+        "BUYER_UAT_NOT_RUN",
+        "COMMERCIAL_LICENSE_HOLD"
+      ]
+    },
+    {
+      "id": "CLOUDLINK-M1B",
+      "name": "CloudLink 智慧派工流程",
+      "route": "cloudlink.html",
+      "category": "field-service",
+      "demo_kind": "STATIC_SYNTHETIC",
+      "display_status": "INTERNAL_PREVIEW",
+      "public_approved": false,
+      "evidence_status": "EXISTING_SOURCE_CITED_NOT_RETESTED",
+      "evidence_id": "E-CL-001",
+      "limitations": [
+        "ORIGINAL_REACT_BROWSER_E2E_BLOCKED",
+        "IAM_TENANCY_NOT_VERIFIED",
+        "PAYMENTS_DISABLED"
+      ]
+    }
+  ]
+}
