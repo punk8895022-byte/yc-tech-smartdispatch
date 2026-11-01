@@ -68,3 +68,17 @@ export XY_CLOUDLINK_LEGACY_HTML_PATH=/absolute/path/to/modified-yuntech-prototyp
 - **實際本機**：在前次已驗證的 M1b 本機包套用與 GitHub 相同的 M1c 變更，`python -m pytest -q` **25/25 PASS**；`python scripts_m1c_multi_actor_socket_smoke.py` **M1C_LOOPBACK_SOCKET_PASS**。
 - **重要區分**：這是 M1c-A **LOCAL PASS**，**不是** GitHub Actions CI；此次 GitHub 完整 checkout CI／原始 React 39 萬字整頁瀏覽器 E2E 仍 **NOT_VERIFIED**。無正式 IAM、註冊/帳號管理、撤銷/密碼安全、多租戶資料庫級政策、客服稽核、真實工程師核驗。舊版其他明文 demo 及假金融入口未清理，不可上線。
 - **Gate**：Owner APPROVAL CLOSED；兩個 Draft PR 不合併、無 Production／LINE／金流變更，所有資料必須是虛構。下一關 M1c-B 為真實 Identity 設計及隔離 Staging 安全審核。
+
+## M1c-B｜短效合成工作階段、撤銷及稽核（2026-11-01）
+
+[階段證據](M1CB_EXECUTION_EVIDENCE_2026-11-01.md)｜**LOCAL_TEST_PASS；GITHUB_CI_NOT_VERIFIED；PRODUCTION_CLOSED**
+
+在前文三組互異且 20 字以上**合成測試權杖**及獨立 SQLite DB 設定後，另外設定 `XY_STAGING_SESSIONS=1`（預設關閉）、可選 `XY_STAGING_SESSION_TTL=600`（合法範圍 5–900 秒）。
+- `POST /staging/session`：以合成 bootstrap Bearer 換一次隨機短效 session Bearer。**啟用後業務 API 不再接受 bootstrap token**。回應 `Cache-Control: no-store`。
+- `POST /staging/session/revoke`：撤銷目前短效 Bearer，隨後存取回 401。
+- `GET /staging/audit`：僅合成 reviewer 可以讀取操作稽核（時間、actor、method、路由模板及 HTTP 狀態碼）。不儲存原始 token、request body 或具體 UUID。
+- SQLite 僅留高熵 token SHA-256 雜湊、到期/撤銷狀態，且僅容許 loopback 測試。
+- `python -m pytest -q` **30/30 本機 PASS**；`python scripts_m1cb_session_socket_smoke.py` **REAL_LOOPBACK_TCP_HTTP_PASS**；無需新增付費服務。
+- **重要**：不設定 `XY_STAGING_SESSIONS` 時，舊 DEMO token 仍可使用；舊版 React 還沒有接新 session 交換流程，完整 React E2E/正式身份、OAuth、租戶 DB RLS、TLS、暴力破解限流、稽核保留皆未驗證。請勿公開、商用或傳入真實資料。Owner Gate CLOSED。
+
+下一階段：在既有原 React feature 分支中隔離接短效 session，完成全頁瀏覽器 E2E／功能撤銷後 UI 反應，再進正式 IAM/tenant 安全設計評估。
