@@ -59,3 +59,10 @@
 - **本機實測**：重建 M1b 已驗證包後，`pytest` 25/25 PASS，真正 127.0.0.1 TCP/HTTP＋SQLite 跨客戶、跨工程師隔離 `M1C_LOOPBACK_SOCKET_PASS`。
 - [Drive V3.5 實際執行證據](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[經營主 Issue #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)。
 - **未解**：GitHub CI 未驗證、原版 React 完整瀏覽器 E2E 未完成、正式 IAM/租戶 DB 權限與法律金流未實作；所有訂單/收入依舊沒有新成交驗證。M1c-A LOCAL_PASS；M1c-B NOT_RUN；Production Owner Gate CLOSED。
+
+## 2026-11-01｜G2 來源與契約收斂（LATEST／隔離研究分支）
+- **同一研究主線**：[G2 source/contract 與 Gate 證據](docs/YC_TECH_MATCH_G2_SOURCE_AND_SCHEMA_GATE_2026-11-01_v0.1_RESEARCH_ONLY.md)：已確認本 repo 的 POC 比 `yc-tech-smartdispatch-1` 簡單骨架更具實作；舊 `yuntech-prototype` React 仍只是依賴來源，三者不合併正式程式或資料庫。
+- 本分支沿用 `yc-tech-smartdispatch-1` 的 2 份純函數 policy/test，另加 `g2_projection.py` 與 12 項獨立測試；只支援臺南 CCTV / Wi-Fi 的受控 Review DTO，**NAS 暫不支援**，不開金流。
+- **G2_SCOPE_RECONCILED / LOCAL_UNIT_PASS_SCOPED；CANONICAL_BUSINESS_OS_NOT_CONNECTED；G3_RUNTIME_NOT_RUN；Owner Gate CLOSED**。未經核實 Identity/Tenant/RBAC、審核證據與正式後端，不得把 `REVIEW_ONLY` 升級對外操作。
+- 此分支新 code 沒有被接入 `app.py` 正式路由；任何被截圖的通過畫面或合成記錄不代表真實客戶成交／收入。
+
