@@ -77,7 +77,7 @@ def test_ui_and_role_scoped_read_endpoints(client):
     mine = client.get('/my/requests',headers=headers('customer')).json()
     assert any(j['id'] == rid and j['state']=='PENDING' for j in mine)
     pending = client.get('/review/requests',headers=headers('reviewer')).json()
-    assert any(j['id'] == rid for j in pending
+    assert any(j['id'] == rid for j in pending)
 
 
 def test_database_persists_after_restarting_app(client):
