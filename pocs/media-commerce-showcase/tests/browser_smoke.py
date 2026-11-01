@@ -91,7 +91,7 @@ def main():
     css = (ROOT / "assets/styles.css").read_text(encoding="utf-8")
     for name in PAGES:
         assert (ROOT / name).is_file()
-    with tempfile.TemporaryDirectory(prefix="xy-showcase-chrome-") as user_dir:
+    with tempfile.TemporaryDirectory(prefix="xy-showcase-chrome-", ignore_cleanup_errors=True) as user_dir:
         args = [chrome,"--headless=new","--no-sandbox","--disable-dev-shm-usage",
                 "--no-first-run","--disable-gpu","--remote-allow-origins=*",
                 "--remote-debugging-port=0",f"--user-data-dir={user_dir}","about:blank"]
