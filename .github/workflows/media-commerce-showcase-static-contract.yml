@@ -23,6 +23,12 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run standard-library static checks (no APIs/secrets)
         run: python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v
+      - name: Install Traditional Chinese screenshot fonts (CI runner only)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+          fc-cache -f
+          fc-match "Noto Sans CJK TC"
       - name: Run Chromium viewport smoke (390px + 1280px, synthetic pages)
         run: python3 pocs/media-commerce-showcase/tests/browser_smoke.py
       - name: Upload six synthetic review screenshots
