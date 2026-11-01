@@ -1,6 +1,6 @@
 # 小雲 Media Commerce｜作品展示 MVP v0.1（2026-11-01）
 
-**狀態：INTERNAL_PREVIEW_ONLY / G3 STATIC_CONTRACT_PENDING_CI / G5 OWNER_GATE_CLOSED / NOT_DEPLOYED**
+**狀態：INTERNAL_PREVIEW_ONLY / G3 AUTOMATED_CI_CHROMIUM_PASS_SCOPED / G5 OWNER_GATE_CLOSED / NOT_DEPLOYED**
 
 ## 目的與定位
 基於現有 [Asset OS 雙平台 PRD](../../docs/YC_DUAL_PLATFORMS_PRD_2026-10-31_v0.1_DRAFT.md) 與既有 Media Commerce 方向新增第一個**純靜態、可本機審核**的展示切片，不建立第二套 CRM、DB、會員、金流或 AI Agent Runtime。本切片放在現有 `yc-tech-smartdispatch` 的獨立 feature branch；**來源 Repo 為公開 Repo**，因此本目錄只存不含 Secrets／PII 的合成資訊與公開適用的內容。
@@ -42,3 +42,9 @@ python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v
 - G4：正式網站/IdeaX 投稿資格 NOT_VERIFIED。
 - G5：OWNER_GATE_CLOSED。
 - 2026-11-01 v0.1：第一版兩個詳細頁與列表，尚未部署、發文、合併或收費。
+
+
+## 2026-11-01 G3 自動測試結果
+- GitHub Actions [成功 Run #41293584631](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41293584631)，Python 契約 14/14 PASS；Chromium 真實渲染 390px/1280px 共 6/6 PASS。
+- [6 張校正中文字型後的截圖 Artifact](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41293584631/artifacts/13078621441)，7 日保留；詳細範圍及修正歷史見 [Owner Evidence](evidence/OWNER_REVIEW_2026-11-01_v0.1_DRAFT.md)。
+- 仍缺正式 iPhone Safari/VoiceOver 使用驗證、產品實際 E2E、外部公開授權及 G5 Owner Gate；沒有合併 main 或部署。
