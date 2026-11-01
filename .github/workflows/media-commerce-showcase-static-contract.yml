@@ -23,3 +23,13 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run standard-library static checks (no APIs/secrets)
         run: python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v
+      - name: Run Chromium viewport smoke (390px + 1280px, synthetic pages)
+        run: python3 pocs/media-commerce-showcase/tests/browser_smoke.py
+      - name: Upload six synthetic review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: media-commerce-showcase-browser-shots
+          path: pocs/media-commerce-showcase/browser-screenshots/*.png
+          if-no-files-found: warn
+          retention-days: 7
