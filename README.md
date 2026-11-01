@@ -53,3 +53,9 @@
 - [舊專案原始 React feature 分支 Draft PR](https://github.com/punk8895022-byte/yuntech-prototype/pull/1)：`index.html` 與 `app.jsx` 都改為 `ClientCreateJob` 送出 `POST /legacy/requests`；保留 master 不變，取消該流程「假訂金已付款」與錢包扣款。
 - [本專案 staging-only 後端](pocs/cloudlink-staging-api/README.md)：`/legacy-react` 必須本機 loopback、明確設定功能旗標及獨立原版 index 路徑。測試資料只允許虛構資料、類別 `net/cctv/access`、縣市級地區。
 - **Gate**：FastAPI/SQLite 本機 18/18 PASS，另有 Python 127.0.0.1 實際 socket/HTTP 跨角色測試 PASS；舊版原始 React 的完整瀏覽器操作未通過驗收（CDN/React runtime 不可在本環境完整重現）；不代表 IAM/多租戶/金流或 Production 可用。
+
+## V3.5｜M1c-A 多帳號隔離本機驗收（2026-11-01）
+- [後端代碼／測試規格](pocs/cloudlink-staging-api/README.md)：修復先前測試語法阻塞，合成客戶 A/B、工程師 A/B 隔離、非法身分拒絕、工程師私有報價 API。
+- **本機實測**：重建 M1b 已驗證包後，`pytest` 25/25 PASS，真正 127.0.0.1 TCP/HTTP＋SQLite 跨客戶、跨工程師隔離 `M1C_LOOPBACK_SOCKET_PASS`。
+- [Drive V3.5 實際執行證據](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[經營主 Issue #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)。
+- **未解**：GitHub CI 未驗證、原版 React 完整瀏覽器 E2E 未完成、正式 IAM/租戶 DB 權限與法律金流未實作；所有訂單/收入依舊沒有新成交驗證。M1c-A LOCAL_PASS；M1c-B NOT_RUN；Production Owner Gate CLOSED。
