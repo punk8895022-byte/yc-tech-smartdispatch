@@ -310,4 +310,11 @@ def create_app() -> FastAPI:
                        (quote_id, found["request_id"]))
         return {"request_id": found["request_id"], "selected_quote": quote_id, "state": "SELECTED"}
 
+    # Strictly opt-in synthetic CCTV workorder / acceptance; never a real settlement.
+    if os.getenv("XY_ENABLE_WORKORDER_DEMO") == "1":
+        if not sessions:
+            raise RuntimeError("Workorders require staging sessions")
+        from workorder_demo import register_workorder_demo_routes
+        register_workorder_demo_routes(app, path, role)
+
     return app
