@@ -87,3 +87,9 @@
 - 新增 **預設關閉** 的 `XY_ENABLE_WORKORDER_DEMO=1` 合成工單／模擬驗收（需 `XY_STAGING_SESSIONS=1`）；由已選台南 CCTV 報價建立 `ASSIGNED`，承包人提交 `synthetic:` 代號，客戶要求重做/模擬接受；真正 loopback HTTP 重跑 `CCTV_WORKORDER_REAL_LOOPBACK_HTTP_PASS`。
 - [API 程式](pocs/cloudlink-staging-api/workorder_demo.py)／[工單測試](pocs/cloudlink-staging-api/tests/test_workorder_demo.py)／[CCTV HTTP 腳本](pocs/cloudlink-staging-api/scripts_tbm_cctv_loopback_http.py)／[工單 HTTP 腳本](pocs/cloudlink-staging-api/scripts_tbm_workorder_loopback_http.py)。
 - 這只表示合成資料的本機隔離 HTTP/SQLite **G3_LOCAL_PASS_SCOPED**；**CI_NOT_VERIFIED、CANONICAL_BUSINESS_OS_NOT_CONNECTED、REAL_ACCEPTANCE_NOT_RUN、PRODUCTION_OWNER_GATE_CLOSED**。沒有真實客戶/現場照片/正式簽收/金流，也不新增付費 API、不合併 Draft PR。
+
+
+## 2026-11-02｜CCTV Clean Runner CI ＋ Business OS G4 合約 Gate（最新增量）
+- [隔離 GitHub Actions workflow](.github/workflows/yc-tech-match-cctv-staging-ci.yml)，[Run #41380419911](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41380419911)：GitHub-hosted Ubuntu 24.04/Python 3.12，Run SHA `2cfe7ef4519561050c5ba9a03bae4a51c3a4caa1`，**completed/success**，Job Logs `59 passed, 1 warning, 3 subtests passed`、CCTV 真實 localhost HTTP PASS、合成工單 HTTP PASS、短效 session/revoke/audit PASS。
+- [G4 Canonical Interface／Reviewer Gate](docs/YC_TECH_MATCH_BUSINESS_OS_CANONICAL_G4_GATE_2026-11-02_v0.1_RESEARCH_ONLY.md)：對照現有 staging SQLite 與 Business OS PRD，正式 Identity/Tenant/RBAC、WorkOrder/Evidence/Acceptance/Audit 仍缺 Owner 核定的 canonical schema 和 Runtime；本文只列 `PROPOSED_REQUIRED_FIELDS`，**不宣稱已對接**。
+- **範圍界線**：Runner 通過不等於獨立真人 Reviewer；警告包含 Starlette/httpx 和 Node 20 deprecated；`INDEPENDENT_REVIEW_NOT_RUN`、`G4_CANONICAL_RUNTIME_BLOCKED`、`OWNER_GATE_CLOSED`。不 merge main、不部署、無實際收款、不新增付費 API。
