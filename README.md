@@ -79,3 +79,11 @@
 - [TBM 免費／付費、案源品質、平台風險與小雲吸收 Gate](docs/research/YC_TECH_MATCH_TBM_COMPETITOR_2026-11-02_v1.0_RESEARCH_ONLY.md)：公開研究範圍通過；付費進駐 HOLD。
 - [CCTV 合成案件政策測試](pocs/cloudlink-staging-api/tests/test_tbm_cctv_policy.py)：沿用現有 marketplace_contract/g2_projection（比對來源 Git blob SHA 一致），本地離線 unittest 2/2 PASS；CCTV 台南、資格/同意/審核、NAS/外地阻擋、收費/公開 fail-closed。**非原 FastAPI 實際 HTTP／施工／付款 E2E**。
 - Drive [雙平台權威 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit) 應同步維護本次增量；Owner Gate CLOSED，不合併、不部署、不註冊／付費 TBM。
+
+
+## 2026-11-02｜台南 CCTV 真實 HTTP 與工單模擬驗收（新隔離切片）
+- [G3 受限執行證據](docs/YC_TECH_MATCH_CCTV_HTTP_WORKORDER_G3_2026-11-02_v0.1_STAGING_ONLY.md)：既有 FastAPI/SQLite 於本次隔離容器測試 23 份原始碼 Git Blob SHA 一致，改動前 `55 passed, 3 subtests`；TDD RED 3 個預期失敗 → GREEN 新測試 4/4 → 全套 `59 passed, 3 subtests`。
+- 真正 `127.0.0.1` TCP/HTTP 的 CCTV request→moderate→quote→select（含 SQLite 持久讀回、短效角色權限、拒絕與精簡 audit）輸出 `CCTV_REAL_LOOPBACK_HTTP_PASS`。
+- 新增 **預設關閉** 的 `XY_ENABLE_WORKORDER_DEMO=1` 合成工單／模擬驗收（需 `XY_STAGING_SESSIONS=1`）；由已選台南 CCTV 報價建立 `ASSIGNED`，承包人提交 `synthetic:` 代號，客戶要求重做/模擬接受；真正 loopback HTTP 重跑 `CCTV_WORKORDER_REAL_LOOPBACK_HTTP_PASS`。
+- [API 程式](pocs/cloudlink-staging-api/workorder_demo.py)／[工單測試](pocs/cloudlink-staging-api/tests/test_workorder_demo.py)／[CCTV HTTP 腳本](pocs/cloudlink-staging-api/scripts_tbm_cctv_loopback_http.py)／[工單 HTTP 腳本](pocs/cloudlink-staging-api/scripts_tbm_workorder_loopback_http.py)。
+- 這只表示合成資料的本機隔離 HTTP/SQLite **G3_LOCAL_PASS_SCOPED**；**CI_NOT_VERIFIED、CANONICAL_BUSINESS_OS_NOT_CONNECTED、REAL_ACCEPTANCE_NOT_RUN、PRODUCTION_OWNER_GATE_CLOSED**。沒有真實客戶/現場照片/正式簽收/金流，也不新增付費 API、不合併 Draft PR。
