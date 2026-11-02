@@ -73,3 +73,9 @@
 - **本機測試**：`pytest` 30/30 PASS；真實 `127.0.0.1` TCP/HTTP `M1CB_REAL_SOCKET_PASS`；GitHub Actions CI / 原始 React 完整 E2E 尚未驗證。
 - [Google Drive 單一執行證據 V3.6](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[主 Issue #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)。
 - **M1c-B LOCAL_PASS / M1c-C NOT_RUN / G6 OWNER_GATE_CLOSED**：真實 IAM/租戶 RLS、React UI 短效 Session、TLS/限流、工程師身份、正式金流/營收均未完成，不合併 PR、不部署 Production。
+
+
+## 2026-11-02｜TBM 競品研究 × 台南 CCTV 隔離政策測試（RESEARCH ONLY）
+- [TBM 免費／付費、案源品質、平台風險與小雲吸收 Gate](docs/research/YC_TECH_MATCH_TBM_COMPETITOR_2026-11-02_v1.0_RESEARCH_ONLY.md)：公開研究範圍通過；付費進駐 HOLD。
+- [CCTV 合成案件政策測試](pocs/cloudlink-staging-api/tests/test_tbm_cctv_policy.py)：沿用現有 marketplace_contract/g2_projection（比對來源 Git blob SHA 一致），本地離線 unittest 2/2 PASS；CCTV 台南、資格/同意/審核、NAS/外地阻擋、收費/公開 fail-closed。**非原 FastAPI 實際 HTTP／施工／付款 E2E**。
+- Drive [雙平台權威 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit) 應同步維護本次增量；Owner Gate CLOSED，不合併、不部署、不註冊／付費 TBM。
