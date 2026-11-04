@@ -1,5 +1,5 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.2.0",
   "generated_at": "2026-11-01",
   "scope": "INTERNAL_PREVIEW_ONLY",
   "source_domain": "Media Commerce / Asset OS",
@@ -25,7 +25,19 @@
         "REAL_CLAUDE_CODEX_E2E_NOT_RUN",
         "BUYER_UAT_NOT_RUN",
         "COMMERCIAL_LICENSE_HOLD"
-      ]
+      ],
+      "positioning": {
+        "problem": "跨工具交接時，任務與測試證據容易遺漏",
+        "audience": "經常切換 AI 編程工具的開發者",
+        "proof_statement": "既有隔離離線 CI／商品 ZIP 完整性證據；真人跨模型交接未驗收"
+      },
+      "external_submission_status": "NOT_SUBMITTED",
+      "review_requirements": {
+        "rights": "HOLD",
+        "pii": "REVIEW_PENDING",
+        "product_e2e": "NOT_VERIFIED",
+        "owner": "NOT_APPROVED"
+      }
     },
     {
       "id": "CLOUDLINK-M1B",
@@ -41,7 +53,44 @@
         "ORIGINAL_REACT_BROWSER_E2E_BLOCKED",
         "IAM_TENANCY_NOT_VERIFIED",
         "PAYMENTS_DISABLED"
-      ]
+      ],
+      "positioning": {
+        "problem": "報修、審核與工程報價常分散在不同對話",
+        "audience": "資訊弱電工程服務的需求方與承攬者",
+        "proof_statement": "隔離 HTTP／pytest 合成流程證據；原版 React E2E 未驗收"
+      },
+      "external_submission_status": "NOT_SUBMITTED",
+      "review_requirements": {
+        "rights": "HOLD",
+        "pii": "REVIEW_PENDING",
+        "product_e2e": "NOT_VERIFIED",
+        "owner": "NOT_APPROVED"
+      }
     }
-  ]
+  ],
+  "discovery": {
+    "mode": "STATIC_EDITORIAL_REVIEW",
+    "public_sorting": false,
+    "public_likes": false,
+    "categories": [
+      {
+        "id": "ai-workflow",
+        "label": "AI 開發效率"
+      },
+      {
+        "id": "field-service",
+        "label": "資訊工程服務"
+      }
+    ]
+  },
+  "distribution": {
+    "phase": "RESEARCH_ONLY",
+    "external_posting": "DISABLED",
+    "public_tracking": "DISABLED",
+    "submissions": [],
+    "channels_reviewed": [
+      "IdeaX works wall (screenshot only; submission contract not independently verified)"
+    ],
+    "note": "Do not publish or send credentials; channel eligibility, rules, fees, API unverified."
+  }
 }
