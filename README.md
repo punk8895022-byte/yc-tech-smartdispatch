@@ -93,3 +93,11 @@
 - [隔離 GitHub Actions workflow](.github/workflows/yc-tech-match-cctv-staging-ci.yml)，[Run #41380419911](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41380419911)：GitHub-hosted Ubuntu 24.04/Python 3.12，Run SHA `2cfe7ef4519561050c5ba9a03bae4a51c3a4caa1`，**completed/success**，Job Logs `59 passed, 1 warning, 3 subtests passed`、CCTV 真實 localhost HTTP PASS、合成工單 HTTP PASS、短效 session/revoke/audit PASS。
 - [G4 Canonical Interface／Reviewer Gate](docs/YC_TECH_MATCH_BUSINESS_OS_CANONICAL_G4_GATE_2026-11-02_v0.1_RESEARCH_ONLY.md)：對照現有 staging SQLite 與 Business OS PRD，正式 Identity/Tenant/RBAC、WorkOrder/Evidence/Acceptance/Audit 仍缺 Owner 核定的 canonical schema 和 Runtime；本文只列 `PROPOSED_REQUIRED_FIELDS`，**不宣稱已對接**。
 - **範圍界線**：Runner 通過不等於獨立真人 Reviewer；警告包含 Starlette/httpx 和 Node 20 deprecated；`INDEPENDENT_REVIEW_NOT_RUN`、`G4_CANONICAL_RUNTIME_BLOCKED`、`OWNER_GATE_CLOSED`。不 merge main、不部署、無實際收款、不新增付費 API。
+
+
+## 2026-11-05｜TBM 公開流程吸收 × 台南 CCTV/Wi-Fi 案源品質卡（最新）
+- [官方 TBM 競品研究與實際 G4 吸收紀錄](docs/YC_TECH_MATCH_TBM_ASSIMILATION_2026-11-05_v0.1_STAGING_ONLY.md)：研究公開 FAQ/條款，吸收分類、完整度與來源核對，不複製 TBM 原始碼、爬取會員資料或模仿付費機制。
+- [read-only 案源證據品質純函數](pocs/cloudlink-staging-api/lead_quality.py) + [10 項新測試](pocs/cloudlink-staging-api/tests/test_lead_quality.py)：台南 CCTV/Wi-Fi、日期新鮮度、範圍/預算/期限；拒絕 PII 額外欄位、私有網址、過期/外地/NAS 等，不授權發包/投標/聯絡/正式同步。
+- [最新乾淨 GitHub Runner #41876061597](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41876061597)，**69 passed, 1 warning, 17 subtests passed**；CCTV HTTP／合成工單／session/audit 回歸均 PASS。**僅代表新增模組合成測試與原本隔離 POC 通過，不等於正式 Business OS 已串接或真實案源可投。**
+- Drive [Asset OS 主 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit) 第 14 節；[TBM 競品研究](https://docs.google.com/document/d/1l82dHCipdP079EY6aZ8dv0em4ZjPVrIuUPb7SeysJCM/edit) 第 11 節。
+- Gate：G4_LEAD_QUALITY_MODULE_CI_PASS_SCOPED / DAILY_PIPELINE_NOT_CONNECTED / INDEPENDENT_REVIEW_NOT_RUN / G4_CANONICAL_SCHEMA_UNVERIFIED / TBM_PAID_JOIN_HOLD / OWNER_GATE_CLOSED。不合併 main、不改正式環境、不開付費 API。
