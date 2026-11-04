@@ -48,3 +48,12 @@ python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v
 - GitHub Actions [成功 Run #41293584631](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41293584631)，Python 契約 14/14 PASS；Chromium 真實渲染 390px/1280px 共 6/6 PASS。
 - [6 張校正中文字型後的截圖 Artifact](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41293584631/artifacts/13078621441)，7 日保留；詳細範圍及修正歷史見 [Owner Evidence](evidence/OWNER_REVIEW_2026-11-01_v0.1_DRAFT.md)。
 - 仍缺正式 iPhone Safari/VoiceOver 使用驗證、產品實際 E2E、外部公開授權及 G5 Owner Gate；沒有合併 main 或部署。
+
+## 2026-11-05 v0.2：作品牆黑箱設計模式吸收（IdeaX-inspired）
+- [研究及取捨](docs/IDEAX_PATTERN_ADOPTION_2026-11-05_v0.2_DRAFT.md)：分清 IdeaX 截圖可見、公開活動資訊與其它平台比較樣本；官方作品牆投稿/API/費用未驗證。
+- 新增首頁「AI 開發效率／資訊工程服務」**主題捷徑**（靜態錨點，不虛稱動態篩選），卡片標示適用對象與測試證據限制。
+- `projects.json` 提升為 schema v0.2.0：新增作品問題/受眾/證據、editorial 類別、投稿未完成狀態；不是 CRM/Lead 權威主庫。
+- [審核腳本](scripts/release_gate.py) 使用 Python stdlib：`--mode internal` 驗證兩作品、資料/權利/公開 Gate；`--mode packet` 僅輸出內部審核文案；`--mode public` 必定回傳 exit 2 阻止外部公開。腳本**不能**認證 Owner 身分或代替正式部署管控。
+- [負測與回歸測試](tests/test_release_gate.py)：覆蓋 fake likes、冒稱外部投稿、路徑穿越、開放追蹤、提前核准、證據缺漏等，GitHub CI 已接入，實際 PASS 以本次 head 的 run 為準。
+- 分工不變：Google Drive Asset OS 原 PRD 為唯一產品整合主規格；GitHub PR #12 為程式與驗收證據；正式 Business OS 維持 Product/CRM/Finance 唯一權威來源。
+- Gate 不變：`PUBLIC_RELEASE_BLOCKED`、`NOT_SUBMITTED`、`OWNER_GATE_CLOSED`。本輪未部署、未投稿 IdeaX、未新增付費 API 或處理實際客戶資料。
