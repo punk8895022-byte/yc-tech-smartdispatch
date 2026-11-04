@@ -101,3 +101,9 @@
 - [最新乾淨 GitHub Runner #41876061597](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41876061597)，**69 passed, 1 warning, 17 subtests passed**；CCTV HTTP／合成工單／session/audit 回歸均 PASS。**僅代表新增模組合成測試與原本隔離 POC 通過，不等於正式 Business OS 已串接或真實案源可投。**
 - Drive [Asset OS 主 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit) 第 14 節；[TBM 競品研究](https://docs.google.com/document/d/1l82dHCipdP079EY6aZ8dv0em4ZjPVrIuUPb7SeysJCM/edit) 第 11 節。
 - Gate：G4_LEAD_QUALITY_MODULE_CI_PASS_SCOPED / DAILY_PIPELINE_NOT_CONNECTED / INDEPENDENT_REVIEW_NOT_RUN / G4_CANONICAL_SCHEMA_UNVERIFIED / TBM_PAID_JOIN_HOLD / OWNER_GATE_CLOSED。不合併 main、不改正式環境、不開付費 API。
+
+## V3.7｜YC Tech Match × CloudLink × 小雲 AI OS 逆向吸收（2026-11-05）
+- [M1c-C 來源反向工程與驗收差異](pocs/cloudlink-staging-api/YC_TECH_MATCH_M1CC_REVERSE_ABSORB_2026-11-05_v0.1_DRAFT.md)：發現原版 React 長效 Token 直接打 API 會與新 Session 模式衝突（401）；在原 React Draft PR 中修正為短效交換 → API → 撤銷，並保留只可本機、無付款的 Gate。
+- [原 React 11 項隔離處理器檢查＋Node 回歸測試](https://github.com/punk8895022-byte/yuntech-prototype/blob/feature/cloudlink-m1b-react-api-20261031/tests/m1cc_legacy_session_flow.test.mjs)；[新 FastAPI 介接測試](pocs/cloudlink-staging-api/tests/test_m1cc_react_legacy_session_contract.py)。**11/11 為本輪 V8 直接執行 GitHub React Handler 的隔離邏輯測試，非瀏覽器 E2E，新增測試檔尚未有 CI 結果**。
+- [小雲 AI OS Research-only Draft PR #35](https://github.com/punk8895022-byte/xiaoyun-ai-os/pull/35)：只吸收可撤銷權限、資料歸屬、Evidence／Reviewer／Owner Gate 的設計模式，不複製 CloudLink Demo token 或將 Public/Private DB 相連。
+- **M1c-C SOURCE_HANDLER_UNIT_PASS / REACT_BROWSER_E2E_NOT_RUN / AIOS_RUNTIME_NOT_CONNECTED / PRODUCTION_OWNER_GATE_CLOSED**。商務千萬營收只計真實合約、驗收與銀行實收，絕不把合成工單當交易。
