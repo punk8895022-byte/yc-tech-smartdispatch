@@ -2,7 +2,7 @@
 
 日期：2026-11-05｜版本：G1.1-DRAFT｜執行範圍：既有 Google Sheets + GitHub Draft PR #1
 
-**Gate：SHEET_SCHEMA_AND_FORMULA_READBACK_PASS / PYTHON_OFFLINE_19_19_PASS / G2_REAL_FINANCE_BLOCKED / GITHUB_CI_NOT_VERIFIED / OWNER_PRODUCTION_GATE_CLOSED。**
+**Gate：SHEET_NATIVE_SYNTHETIC_COPY_E2E_PASS / PYTHON_OFFLINE_19_19_PASS / G2_REAL_FINANCE_BLOCKED / GITHUB_CI_NOT_VERIFIED / OWNER_PRODUCTION_GATE_CLOSED。**
 
 ## 反向工程觀察
 
@@ -30,7 +30,8 @@
 - business/10m/ledger_integrity.py：純 Python 標準函式庫，輸入匿名列表，輸出分開的 revenue_gate、cash_gate、provisional_revenue、provisional_cash；非同步/無連線/無 DB 與正式 Google 寫入。
 - business/10m/test_ledger_integrity.py：19 項合成測試，涵蓋 duplicate（大小寫）、missing fields、未認列、未核准、虛構憑證、日期錯誤、數字異常、代理人總額與費收入區別、收現與認列分離、未知不得填 0。
 - 本機在隔離目錄執行：python -m unittest discover -p test_ledger_integrity.py -v → **19/19 PASS**；GitHub 讀回兩檔 SHA 與本機 Git blob SHA 一致。
-- 尚無這兩個新增測試的 **GitHub CI PASS**；也沒有在 Google Sheet 主台帳寫入假交易進行即時 E2E，所以現有公式只有 metadata/計算結果讀回、尚未涵蓋真實案件驗收。
+- **已完成原生 Google Sheets 的隔離測試副本 E2E**：合成主承攬案件主台帳 Z=REPORTING_PROVISIONAL、AA=CASH_REPORTING_PROVISIONAL；年度總覽認列／結清各 200,000；逐案計算 65,000（32.5%）。重複 ID 阻擋加總、主帳與逐案模式不符阻擋獲利、跨期認列不加總、RECOGNIZED 未結清不加總實收，均驗證 PASS。測試副本已依精確 ID 清除，**原本真實主台帳未放入合成交易**。
+- 尚無兩個新增 Python 程式的 **GitHub CI PASS**，也尚無真實客戶或銀行 E2E、會計法定認列驗證；本階段只完成 scoped synthetic E2E。
 
 ## Owner Gate 及下一階段
 
