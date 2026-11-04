@@ -23,6 +23,18 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run standard-library static checks (no APIs/secrets)
         run: python3 -m unittest discover -s pocs/media-commerce-showcase/tests -v
+      - name: Validate internal editorial manifest (no public release)
+        run: python3 pocs/media-commerce-showcase/scripts/release_gate.py --mode internal
+      - name: Verify public release is explicitly blocked
+        run: |
+          if python3 pocs/media-commerce-showcase/scripts/release_gate.py --mode public; then
+            echo "ERROR: unapproved release unexpectedly allowed"
+            exit 1
+          else
+            code=$?
+            test "$code" -eq 2
+            echo "PASS: public release blocked with exit code 2"
+          fi
       - name: Install Traditional Chinese screenshot fonts (CI runner only)
         run: |
           sudo apt-get update -qq
