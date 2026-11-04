@@ -53,3 +53,6 @@ DRAFT → RFQ_READY（人工複製給廠商）→ VENDOR_REPLY_RECEIVED（附書
 ## 下一步
 先取得含有效期限的廠商書面報價，核對可行替代交換器；經銷價、對客價、毛利與授權分開驗證。核准前保持 DRAFT、不對外承諾價格、不新增付費 API、不接正式 LINE/資料庫。
 版本：v0.1（2026-11-05 首次收斂）。
+
+## Drive 閱讀鏡像（2026-11-05）
+https://docs.google.com/document/d/1VmVVcbLBjqSryraGcJW4Gjd1Ekia7AukIaVgSGl3SQY/edit?usp=drivesdk
