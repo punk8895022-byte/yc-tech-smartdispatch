@@ -1,2 +1,109 @@
-# yc-tech-smartdispatch
-智慧派工系統
+# yc-tech-smartdispatch｜雙平台工程／內容入口（規劃分支）
+
+原 main repo README 僅有「智慧派工系統」。本分支在不改原有 Main 的情況下，規劃把資訊弱電媒合（YC Tech Match）與自媒體分潤（Media Commerce）整合至既有 Xiaoyun Business OS。
+
+## 入口與版本
+- **Owner**：待核准；**Gate**：RESEARCH_ONLY / DRAFT_PR / NOT_DEPLOYED。
+- **目前方案**：兩獨立前台 + 共用 CRM/Approval/Audit/Finance。
+- **需求/架構**：[`docs/YC_DUAL_PLATFORMS_PRD_2026-10-31_v0.1_DRAFT.md`](docs/YC_DUAL_PLATFORMS_PRD_2026-10-31_v0.1_DRAFT.md)
+- **Google Drive 母文件**：[雙平台整合 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit?usp=drivesdk)
+- **Asset OS 戰略**：[V1.0](https://docs.google.com/document/d/1a3D3uKBefJO7ZsEScedhKUUl6o9ZAVhMHx47YCqNhfE/edit)
+- **重用候選**：[既有派工程式](https://github.com/punk8895022-byte/yc-tech-smartdispatch-1) / [AI OS](https://github.com/punk8895022-byte/xiaoyun-ai-os)。
+- **程式碼原型**：本輪完整互動示範已另以 ChatGPT ZIP 附件交付；ZIP 尚未提交到此 GitHub 分支，不能將本 branch 視為已包含可部署程式。
+- **阻塞**：金流/收款責任、工程商資格、正式 Identity/PII 資安、既有 AI OS Runtime/LINE P0。
+- **下一步**：Owner 審方案 → 從附件逐檔提交經測試的 source 到獨立分支 → Reviewer 驗收 M0 → staging 綁接共用後端 M1 → 受限測試 → 另行核准 Production。
+
+## 變更
+- 2026-10-31：首次建立雙平台規劃入口，未對 Production 造成異動。
+
+## V2.0 全球平台研究與成長策略（2026-10-31｜DRAFT）
+- **唯一 V2.0 戰略／Benchmark 入口：** [全球平台比較 × 四大飛輪 × 收益模型 × 90 天驗收](docs/ASSET_OS_V2_GLOBAL_PLATFORM_BENCHMARK_AND_GROWTH_20261031_DRAFT.md)
+- **Google Drive 對照版：** https://docs.google.com/document/d/1T-iSjJ-IluVboCRnLVTQ_dfLSi_eHBwEm92V1_0Cq00/edit
+- **V0.1 範圍：** 保留原雙平台 PRD，V2.0 為新商業研究與 Gate 增量，不取代已存在的功能規格。
+- **商業結論：** 高品質地方弱電/資訊 B2B 需求入口 → 工程商工具訂閱/合法聯盟導流 → 條件成熟後才啟用明示費率的收費模式；不託管工程款、不預設「指數成長必達」。
+- **證據等級：** 市場來源已核對；尚無真實平台合格需求、報價、付費、收入、部署驗收，維持 `RESEARCH_ONLY / OWNER_GATE_CLOSED`。
+
+## V3.0｜年營收 NT$10,000,000 董事會作戰室（DRAFT）
+- [十席 AI 經營團隊與 12 個月三情境收入模型](https://github.com/punk8895022-byte/yc-tech-smartdispatch/blob/feature/asset-os-dual-platforms-20261031/docs/ASSET_OS_10M_REVENUE_WAR_ROOM_20261031_V3_DRAFT.md)
+- [Google Drive 證據與戰略決策文件](https://docs.google.com/document/d/1kt7J5Kbl8K16PPuLv10FxzjzBKB6Tnar-I88GrI81eM/edit?usp=drivesdk)
+- [董事會主工作任務 #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)；分工 [CFO #6](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/6)、[Sales #7](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/7)、[COO #8](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/8)、[Growth #9](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/9)、[Product #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)、[Risk #11](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/11)。
+- **注意**：AI「十席」是可重複使用的模擬決策角色，未聘真人、未啟動 Agent、不代表已有訂單或千萬營收。
+
+## V3.1｜執行成果（2026-10-31｜隔離／未部署）
+- [10M 戰情工作簿](https://docs.google.com/spreadsheets/d/1xvE5zR1FEmiFgYcloNrPVJmF7ulDPaX84EOQ1x_5zZE/edit)：新增 `10M戰情總覽`、`10M商機與實收`；未建帳時不把未知報成 0，舊六頁保留。
+- [第一輪實際執行 Drive 報告](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)。
+- [三項企業解決方案與提案草稿](business/10m/SOW_OFFER_SALES_PLAYBOOK_2026-10-31_v0.1_DRAFT.md)：假設定價、驗收、排除、SOW 和外聯 Gate；尚未對外發送。
+- [CloudLink staging-only 後端 POC](pocs/cloudlink-staging-api/README.md)：FastAPI、SQLite、客戶發案→Reviewer 審核→工程師報價→客戶選擇，測試 `python -m pytest -q` 3/3 PASS（**僅本機隔離，未跑 GitHub Actions**）。關閉付款；未用正式 IAM、多租戶或私人客戶資料。
+- **Next Gate**：前後端 staging 合成 E2E、真實業務需求與成本來源核驗、Owner 核准對外商務聯絡；不得合併 main 或部署 Production。
+
+## M1a｜工程媒合三角色互動關卡（2026-10-31｜LOCAL PASS）
+- 程式：[CloudLink staging-only API + 三角色前端](pocs/cloudlink-staging-api/README.md)，原本的 v0.1 後端已增加 `/demo`、`/my/requests`、`/review/requests`；使用 FastAPI + SQLite，沒有正式登入與金流。
+- 隔離測試：`python -m pytest -q` **5/5 PASS**；Chromium 390px 介面以 in-process ASGI 橋接完成測試發案、審核、報價、選擇、資料讀回。環境封鎖真實 localhost browser navigation，**不能當作完整 HTTP E2E 或正式 CloudLink React 對接通過**。
+- Google Drive [執行報告 V3.2 增量](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[M1 媒合 Issue #3](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/3)；[Product/CTO Issue #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)。
+- **下一關 M1b**：舊版 `yuntech-prototype` 真正 React 前端與新 API 的安全整合；正式 OAuth/IAM、多租戶、工程師審核、報價明細、驗收和實際 staging UAT 全部仍 BLOCKED。
+- PR 仍 Draft；Production／真實客戶／金流／新增付費 API：未執行、未授權。
+
+## V3.3｜CloudLink M1b-A 舊分類相容性驗收（2026-10-31）
+- [Drive V3.3 隔離驗收來源](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[Issue #3](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/3) / [Issue #10](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/10)。
+- **本機完整原型（ChatGPT 附件）**：FastAPI + SQLite + legacy category bridge，pytest 15/15，Chromium 390px 擷取（API bridge，非正式網路 E2E）。
+- **GitHub 目前只同步部分原始碼**：[`legacy_schema.py`](pocs/cloudlink-staging-api/legacy_schema.py)、[`test_legacy_schema.py`](pocs/cloudlink-staging-api/tests/test_legacy_schema.py)、[`legacy.html`](pocs/cloudlink-staging-api/web/legacy.html)；`legacy.html` 尚未正式接上 GitHub 目前的 `app.py` / `legacy.js`，不能只從 Repo 啟動 M1b，源碼完整同步待辦。
+- **M1b-A LOCAL_PASS / GITHUB_SOURCE_PARITY BLOCKED / M1b-B NOT_RUN / PRODUCTION OWNER_GATE_CLOSED**。不得把舊 React 39 萬字元介面視為已完成連線，亦沒有真實收入。
+
+## M1b-B｜原版 CloudLink React 真實發案表單 API 接線（DRAFT）
+- [舊專案原始 React feature 分支 Draft PR](https://github.com/punk8895022-byte/yuntech-prototype/pull/1)：`index.html` 與 `app.jsx` 都改為 `ClientCreateJob` 送出 `POST /legacy/requests`；保留 master 不變，取消該流程「假訂金已付款」與錢包扣款。
+- [本專案 staging-only 後端](pocs/cloudlink-staging-api/README.md)：`/legacy-react` 必須本機 loopback、明確設定功能旗標及獨立原版 index 路徑。測試資料只允許虛構資料、類別 `net/cctv/access`、縣市級地區。
+- **Gate**：FastAPI/SQLite 本機 18/18 PASS，另有 Python 127.0.0.1 實際 socket/HTTP 跨角色測試 PASS；舊版原始 React 的完整瀏覽器操作未通過驗收（CDN/React runtime 不可在本環境完整重現）；不代表 IAM/多租戶/金流或 Production 可用。
+
+## V3.5｜M1c-A 多帳號隔離本機驗收（2026-11-01）
+- [後端代碼／測試規格](pocs/cloudlink-staging-api/README.md)：修復先前測試語法阻塞，合成客戶 A/B、工程師 A/B 隔離、非法身分拒絕、工程師私有報價 API。
+- **本機實測**：重建 M1b 已驗證包後，`pytest` 25/25 PASS，真正 127.0.0.1 TCP/HTTP＋SQLite 跨客戶、跨工程師隔離 `M1C_LOOPBACK_SOCKET_PASS`。
+- [Drive V3.5 實際執行證據](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[經營主 Issue #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)。
+- **未解**：GitHub CI 未驗證、原版 React 完整瀏覽器 E2E 未完成、正式 IAM/租戶 DB 權限與法律金流未實作；所有訂單/收入依舊沒有新成交驗證。M1c-A LOCAL_PASS；M1c-B NOT_RUN；Production Owner Gate CLOSED。
+
+## 2026-11-01｜G2 來源與契約收斂（LATEST／隔離研究分支）
+- **同一研究主線**：[G2 source/contract 與 Gate 證據](docs/YC_TECH_MATCH_G2_SOURCE_AND_SCHEMA_GATE_2026-11-01_v0.1_RESEARCH_ONLY.md)：已確認本 repo 的 POC 比 `yc-tech-smartdispatch-1` 簡單骨架更具實作；舊 `yuntech-prototype` React 仍只是依賴來源，三者不合併正式程式或資料庫。
+- 本分支沿用 `yc-tech-smartdispatch-1` 的 2 份純函數 policy/test，另加 `g2_projection.py` 與 12 項獨立測試；只支援臺南 CCTV / Wi-Fi 的受控 Review DTO，**NAS 暫不支援**，不開金流。
+- **G2_SCOPE_RECONCILED / LOCAL_UNIT_PASS_SCOPED；CANONICAL_BUSINESS_OS_NOT_CONNECTED；G3_RUNTIME_NOT_RUN；Owner Gate CLOSED**。未經核實 Identity/Tenant/RBAC、審核證據與正式後端，不得把 `REVIEW_ONLY` 升級對外操作。
+- 此分支新 code 沒有被接入 `app.py` 正式路由；任何被截圖的通過畫面或合成記錄不代表真實客戶成交／收入。
+
+
+## V3.6｜M1c-B 短效工作階段／撤銷與精簡稽核（2026-11-01）
+- [M1c-B 測試證據](pocs/cloudlink-staging-api/M1CB_EXECUTION_EVIDENCE_2026-11-01.md)：現有 staging-only FastAPI／SQLite 擴充隨機短效 session、撤銷與匿名化路由稽核（非正式 IAM）。
+- [隔離測試 API 說明](pocs/cloudlink-staging-api/README.md)：`XY_STAGING_SESSIONS=1` 才啟用，原 bootstrap token 在此模式不能直接當業務 API 身分，session TTL 5–900 秒。
+- **本機測試**：`pytest` 30/30 PASS；真實 `127.0.0.1` TCP/HTTP `M1CB_REAL_SOCKET_PASS`；GitHub Actions CI / 原始 React 完整 E2E 尚未驗證。
+- [Google Drive 單一執行證據 V3.6](https://docs.google.com/document/d/1J_lTqVI4r1iulZXs0cJyPDMUT3AcE28su7NNs42JkNM/edit)；[主 Issue #5](https://github.com/punk8895022-byte/yc-tech-smartdispatch/issues/5)。
+- **M1c-B LOCAL_PASS / M1c-C NOT_RUN / G6 OWNER_GATE_CLOSED**：真實 IAM/租戶 RLS、React UI 短效 Session、TLS/限流、工程師身份、正式金流/營收均未完成，不合併 PR、不部署 Production。
+
+
+## 2026-11-02｜TBM 競品研究 × 台南 CCTV 隔離政策測試（RESEARCH ONLY）
+- [TBM 免費／付費、案源品質、平台風險與小雲吸收 Gate](docs/research/YC_TECH_MATCH_TBM_COMPETITOR_2026-11-02_v1.0_RESEARCH_ONLY.md)：公開研究範圍通過；付費進駐 HOLD。
+- [CCTV 合成案件政策測試](pocs/cloudlink-staging-api/tests/test_tbm_cctv_policy.py)：沿用現有 marketplace_contract/g2_projection（比對來源 Git blob SHA 一致），本地離線 unittest 2/2 PASS；CCTV 台南、資格/同意/審核、NAS/外地阻擋、收費/公開 fail-closed。**非原 FastAPI 實際 HTTP／施工／付款 E2E**。
+- Drive [雙平台權威 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit) 應同步維護本次增量；Owner Gate CLOSED，不合併、不部署、不註冊／付費 TBM。
+
+
+## 2026-11-02｜台南 CCTV 真實 HTTP 與工單模擬驗收（新隔離切片）
+- [G3 受限執行證據](docs/YC_TECH_MATCH_CCTV_HTTP_WORKORDER_G3_2026-11-02_v0.1_STAGING_ONLY.md)：既有 FastAPI/SQLite 於本次隔離容器測試 23 份原始碼 Git Blob SHA 一致，改動前 `55 passed, 3 subtests`；TDD RED 3 個預期失敗 → GREEN 新測試 4/4 → 全套 `59 passed, 3 subtests`。
+- 真正 `127.0.0.1` TCP/HTTP 的 CCTV request→moderate→quote→select（含 SQLite 持久讀回、短效角色權限、拒絕與精簡 audit）輸出 `CCTV_REAL_LOOPBACK_HTTP_PASS`。
+- 新增 **預設關閉** 的 `XY_ENABLE_WORKORDER_DEMO=1` 合成工單／模擬驗收（需 `XY_STAGING_SESSIONS=1`）；由已選台南 CCTV 報價建立 `ASSIGNED`，承包人提交 `synthetic:` 代號，客戶要求重做/模擬接受；真正 loopback HTTP 重跑 `CCTV_WORKORDER_REAL_LOOPBACK_HTTP_PASS`。
+- [API 程式](pocs/cloudlink-staging-api/workorder_demo.py)／[工單測試](pocs/cloudlink-staging-api/tests/test_workorder_demo.py)／[CCTV HTTP 腳本](pocs/cloudlink-staging-api/scripts_tbm_cctv_loopback_http.py)／[工單 HTTP 腳本](pocs/cloudlink-staging-api/scripts_tbm_workorder_loopback_http.py)。
+- 這只表示合成資料的本機隔離 HTTP/SQLite **G3_LOCAL_PASS_SCOPED**；**CI_NOT_VERIFIED、CANONICAL_BUSINESS_OS_NOT_CONNECTED、REAL_ACCEPTANCE_NOT_RUN、PRODUCTION_OWNER_GATE_CLOSED**。沒有真實客戶/現場照片/正式簽收/金流，也不新增付費 API、不合併 Draft PR。
+
+
+## 2026-11-02｜CCTV Clean Runner CI ＋ Business OS G4 合約 Gate（最新增量）
+- [隔離 GitHub Actions workflow](.github/workflows/yc-tech-match-cctv-staging-ci.yml)，[Run #41380419911](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41380419911)：GitHub-hosted Ubuntu 24.04/Python 3.12，Run SHA `2cfe7ef4519561050c5ba9a03bae4a51c3a4caa1`，**completed/success**，Job Logs `59 passed, 1 warning, 3 subtests passed`、CCTV 真實 localhost HTTP PASS、合成工單 HTTP PASS、短效 session/revoke/audit PASS。
+- [G4 Canonical Interface／Reviewer Gate](docs/YC_TECH_MATCH_BUSINESS_OS_CANONICAL_G4_GATE_2026-11-02_v0.1_RESEARCH_ONLY.md)：對照現有 staging SQLite 與 Business OS PRD，正式 Identity/Tenant/RBAC、WorkOrder/Evidence/Acceptance/Audit 仍缺 Owner 核定的 canonical schema 和 Runtime；本文只列 `PROPOSED_REQUIRED_FIELDS`，**不宣稱已對接**。
+- **範圍界線**：Runner 通過不等於獨立真人 Reviewer；警告包含 Starlette/httpx 和 Node 20 deprecated；`INDEPENDENT_REVIEW_NOT_RUN`、`G4_CANONICAL_RUNTIME_BLOCKED`、`OWNER_GATE_CLOSED`。不 merge main、不部署、無實際收款、不新增付費 API。
+
+
+## 2026-11-05｜TBM 公開流程吸收 × 台南 CCTV/Wi-Fi 案源品質卡（最新）
+- [官方 TBM 競品研究與實際 G4 吸收紀錄](docs/YC_TECH_MATCH_TBM_ASSIMILATION_2026-11-05_v0.1_STAGING_ONLY.md)：研究公開 FAQ/條款，吸收分類、完整度與來源核對，不複製 TBM 原始碼、爬取會員資料或模仿付費機制。
+- [read-only 案源證據品質純函數](pocs/cloudlink-staging-api/lead_quality.py) + [10 項新測試](pocs/cloudlink-staging-api/tests/test_lead_quality.py)：台南 CCTV/Wi-Fi、日期新鮮度、範圍/預算/期限；拒絕 PII 額外欄位、私有網址、過期/外地/NAS 等，不授權發包/投標/聯絡/正式同步。
+- [最新乾淨 GitHub Runner #41876061597](https://github.com/punk8895022-byte/yc-tech-smartdispatch/actions/runs/41876061597)，**69 passed, 1 warning, 17 subtests passed**；CCTV HTTP／合成工單／session/audit 回歸均 PASS。**僅代表新增模組合成測試與原本隔離 POC 通過，不等於正式 Business OS 已串接或真實案源可投。**
+- Drive [Asset OS 主 PRD](https://docs.google.com/document/d/1r8n5EFnImrTQYIAZw8_HkK-SEJqGSTVROFkhWMMJe5g/edit) 第 14 節；[TBM 競品研究](https://docs.google.com/document/d/1l82dHCipdP079EY6aZ8dv0em4ZjPVrIuUPb7SeysJCM/edit) 第 11 節。
+- Gate：G4_LEAD_QUALITY_MODULE_CI_PASS_SCOPED / DAILY_PIPELINE_NOT_CONNECTED / INDEPENDENT_REVIEW_NOT_RUN / G4_CANONICAL_SCHEMA_UNVERIFIED / TBM_PAID_JOIN_HOLD / OWNER_GATE_CLOSED。不合併 main、不改正式環境、不開付費 API。
+
+## V3.7｜YC Tech Match × CloudLink × 小雲 AI OS 逆向吸收（2026-11-05）
+- [M1c-C 來源反向工程與驗收差異](pocs/cloudlink-staging-api/YC_TECH_MATCH_M1CC_REVERSE_ABSORB_2026-11-05_v0.1_DRAFT.md)：發現原版 React 長效 Token 直接打 API 會與新 Session 模式衝突（401）；在原 React Draft PR 中修正為短效交換 → API → 撤銷，並保留只可本機、無付款的 Gate。
+- [原 React 11 項隔離處理器檢查＋Node 回歸測試](https://github.com/punk8895022-byte/yuntech-prototype/blob/feature/cloudlink-m1b-react-api-20261031/tests/m1cc_legacy_session_flow.test.mjs)；[新 FastAPI 介接測試](pocs/cloudlink-staging-api/tests/test_m1cc_react_legacy_session_contract.py)。**11/11 為本輪 V8 直接執行 GitHub React Handler 的隔離邏輯測試，非瀏覽器 E2E，新增測試檔尚未有 CI 結果**。
+- [小雲 AI OS Research-only Draft PR #35](https://github.com/punk8895022-byte/xiaoyun-ai-os/pull/35)：只吸收可撤銷權限、資料歸屬、Evidence／Reviewer／Owner Gate 的設計模式，不複製 CloudLink Demo token 或將 Public/Private DB 相連。
+- **M1c-C SOURCE_HANDLER_UNIT_PASS / REACT_BROWSER_E2E_NOT_RUN / AIOS_RUNTIME_NOT_CONNECTED / PRODUCTION_OWNER_GATE_CLOSED**。商務千萬營收只計真實合約、驗收與銀行實收，絕不把合成工單當交易。
