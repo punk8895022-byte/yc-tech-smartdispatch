@@ -104,6 +104,6 @@
 
 
 ## 2026-11-05｜Zyxel 6 台設備：供應商詢價 → PoE 風險 → 成本/毛利（RESEARCH_ONLY）
-- [唯一研究/SOP](docs/research/XY_ENGINEERING_RFQ_ZYXEL_2026-11-05_v0.1_RESEARCH_ONLY.md)：設備 BOM、LINE 詢價草稿、供應商欄位/授權、PoE 64W > 60W 阻擋、人工 Owner Gate。
+- [唯一研究/SOP](docs/research/XY_ENGINEERING_RFQ_ZYXEL_2026-11-05_v0.1_RESEARCH_ONLY.md)｜[Google Drive 閱讀鏡像](https://docs.google.com/document/d/1VmVVcbLBjqSryraGcJW4Gjd1Ekia7AukIaVgSGl3SQY/edit?usp=drivesdk)：設備 BOM、LINE 詢價草稿、供應商欄位/授權、PoE 64W > 60W 阻擋、人工 Owner Gate。
 - [隔離純函數與測試](pocs/engineering-rfq/README.md)：13 項本地離線測試 PASS（合成資料）；GitHub CI 與實際系統 E2E NOT_RUN。
 - Owner Gate CLOSED：不接正式 LINE、CRM、Finance/金流、三機或 Production；不自動對外發送或下單；真實成本與廠商報價尚未取得。
