@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow,noarchive">
+<title>小雲 Affiliate Sandbox｜內部合成示範</title><link rel="stylesheet" href="../assets/styles.css">
+<style>.aff-wrap{max-width:1050px;margin:auto;padding:32px 24px}.aff-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.aff-card{padding:22px;border:1px solid #dfe7ee;border-radius:16px}.aff-card h2{font-size:20px}.aff-card button{border:0;border-radius:10px;background:#2558b9;color:#fff;padding:12px 16px;min-height:44px;cursor:pointer}.aff-card button:disabled{background:#728397;cursor:not-allowed}.aff-card code{overflow-wrap:anywhere}.aff-note{background:#fff8e9;border-left:4px solid #b98738;padding:16px;margin:20px 0}.aff-table{overflow:auto}table{width:100%;border-collapse:collapse;min-width:560px}th,td{padding:12px;text-align:left;border-bottom:1px solid #dfe7ee}input{padding:10px;border:1px solid #aab7c3;border-radius:8px;max-width:120px}a:focus-visible,button:focus-visible{outline:3px solid #efb457;outline-offset:3px}@media(max-width:790px){.aff-grid{grid-template-columns:1fr}}</style></head>
+<body><a href="#main" class="skip">跳至主要內容</a><div class="notice"><b>INTERNAL REVIEW / MOCK DATA / OWNER GATE CLOSED</b>　無真實合作、出站點擊、金流或資料收集</div>
+<header class="header"><div class="wrap"><a class="logo" href="../index.html">小雲 / Works</a><nav class="nav" aria-label="主要導覽"><a href="../index.html">返回作品展示</a><a href="#report">佣金報表</a></nav></div></header>
+<main id="main" class="aff-wrap"><div class="eyebrow">MEDIA COMMERCE / AFFILIATE REVENUE ENGINE / SANDBOX</div><h1>內容推薦 × SubID × 收益模擬</h1>
+<p>一頁展示三項推薦標的，測試來源歸因與佣金計算。所有數據只在此頁記憶體中計算，重新整理即清空；不傳送、不持久保存。</p>
+<div class="aff-note"><strong>商業揭露：</strong>如將來使用真正聯盟連結，需在推薦位置清楚揭露可能獲得佣金。本頁沒有真實聯盟合作與可點擊購買連結。</div>
+<section aria-labelledby="offers-title"><h2 id="offers-title">三組測試推薦連結（禁止外連）</h2><div class="aff-grid">
+<article class="aff-card"><h2>城市速寫入門課</h2><p>來源：Instagram｜模擬佣金率 4%</p><p>SubID：<code>xy_art_ig_001</code></p><button type="button" data-subid="xy_art_ig_001">模擬點擊</button></article>
+<article class="aff-card"><h2>NAS 選購指南</h2><p>來源：YouTube｜模擬佣金率 3%</p><p>SubID：<code>xy_nas_yt_001</code></p><button type="button" data-subid="xy_nas_yt_001">模擬點擊</button></article>
+<article class="aff-card"><h2>旅行速寫體驗</h2><p>來源：部落格｜模擬佣金率 5%</p><p>SubID：<code>xy_travel_blog_001</code></p><button type="button" data-subid="xy_travel_blog_001">模擬點擊</button></article>
+</div></section>
+<section id="report" aria-labelledby="report-title"><h2 id="report-title">模擬點擊與佣金報表</h2>
+<p>模擬每筆有效訂單金額 NT$ <input id="order-value" type="number" min="0" max="1000000" step="100" value="3000" aria-label="模擬每筆訂單金額">；僅作數學試算，沒有真實成交。</p>
+<div class="aff-table"><table><thead><tr><th scope="col">SubID</th><th scope="col">模擬點擊</th><th scope="col">模擬訂單</th><th scope="col">假設佣金</th><th scope="col">實際已結算</th></tr></thead><tbody id="rows"></tbody></table></div>
+<p id="summary" aria-live="polite"></p><button type="button" id="reset" class="button">清空合成資料</button>
+</section><p class="fine">資料狀態：SYNTHETIC / MOCK ONLY。真正推薦 URL、聯盟審核、訂單匯入、退貨沖銷、結算與出站追蹤均為 NOT_CONNECTED。</p></main>
+<footer class="footer"><div class="wrap"><span>© 2026 Xiaoyun Works · Affiliate sandbox</span><span>OWNER GATE CLOSED / NO PUBLIC TRAFFIC</span></div></footer>
+<script src="./sandbox.js" defer></script></body></html>
