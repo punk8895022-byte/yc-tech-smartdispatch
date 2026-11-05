@@ -1,0 +1,44 @@
+{
+  "schema_version": "0.1.0",
+  "scope": "SYNTHETIC_OFFLINE_ONLY",
+  "owner_gate": "CLOSED",
+  "affiliate_approval": "NOT_VERIFIED",
+  "real_tracking_enabled": false,
+  "real_payouts_enabled": false,
+  "disclosure": "本頁為內部合成示範。未申請或驗證任何聯盟計畫；未使用真實推薦連結。",
+  "offers": [
+    {
+      "id": "DEMO-ART",
+      "title": "城市速寫入門課（模擬）",
+      "category": "art-course",
+      "merchant": "DEMO_MERCHANT",
+      "subid": "xy_art_ig_001",
+      "destination": "",
+      "commission_rate": 0.04,
+      "currency": "TWD",
+      "status": "SYNTHETIC_NOT_APPROVED"
+    },
+    {
+      "id": "DEMO-TECH",
+      "title": "NAS 選購指南（模擬）",
+      "category": "it-gear",
+      "merchant": "DEMO_MERCHANT",
+      "subid": "xy_nas_yt_001",
+      "destination": "",
+      "commission_rate": 0.03,
+      "currency": "TWD",
+      "status": "SYNTHETIC_NOT_APPROVED"
+    },
+    {
+      "id": "DEMO-TRAVEL",
+      "title": "旅行速寫體驗（模擬）",
+      "category": "travel-experience",
+      "merchant": "DEMO_MERCHANT",
+      "subid": "xy_travel_blog_001",
+      "destination": "",
+      "commission_rate": 0.05,
+      "currency": "TWD",
+      "status": "SYNTHETIC_NOT_APPROVED"
+    }
+  ]
+}
