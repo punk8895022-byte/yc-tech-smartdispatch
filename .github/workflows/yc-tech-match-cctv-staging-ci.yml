@@ -1,0 +1,61 @@
+name: YC Tech Match CCTV isolated regression
+
+on:
+  push:
+    branches:
+      - feature/asset-os-dual-platforms-20261031
+    paths:
+      - .github/workflows/yc-tech-match-cctv-staging-ci.yml
+      - pocs/cloudlink-staging-api/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/workflows/yc-tech-match-cctv-staging-ci.yml
+      - pocs/cloudlink-staging-api/**
+
+permissions:
+  contents: read
+
+concurrency:
+  group: yc-match-cctv-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cctv-staging-only:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: pocs/cloudlink-staging-api
+    steps:
+      - name: Checkout isolated source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: pocs/cloudlink-staging-api/requirements.txt
+      - name: Install existing dependencies only
+        run: python -m pip install --disable-pip-version-check -r requirements.txt
+      - name: Verify complete existing and CCTV synthetic test suite
+        run: python -m pytest -q
+      - name: Verify real loopback HTTP CCTV case
+        run: python scripts_tbm_cctv_loopback_http.py
+      - name: Verify real loopback HTTP synthetic workorder
+        run: python scripts_tbm_workorder_loopback_http.py
+      - name: Verify session issue, revocation and redacted audit
+        run: python scripts_m1cb_session_socket_smoke.py
+      - name: Confirm no production settings or payments
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          app = ast.parse(Path('app.py').read_text(encoding='utf-8'))
+          assert not any(isinstance(n, ast.Call) and isinstance(n.func, ast.Name) and n.func.id == 'exec' for n in ast.walk(app))
+          print('SOURCE_PARSE_PASS; CI_SCOPE=STAGING_SYNTHETIC_ONLY; NO_PRODUCTION_DEPLOYMENT')
+          PY
